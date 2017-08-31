@@ -6,17 +6,20 @@
   <title>hexo搭建真正属于自己的博客 | Z華X</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="hexo" />
+  
   
   
   
   <meta name="description" content="前言 前些天，自己刚刚接触hexo，并用hexo搭建了自己的博客，对hexo的强大搭建博客能力感到赞叹。用我的实际体验来说，你只要是有点计算机基础的人，完全可以轻松的使用hexo搭建起自己的博客。你要是用过github、oschina、gitcafe其中的一样，那对你来说，就可以分分钟上手了。其实网上使用hexo搭建博客的教程多的是，我自己也是跟着JoonWhee’s Blog的教程搭建的博客，那">
+<meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo搭建真正属于自己的博客">
 <meta property="og:url" content="http://xinghuazhang.xin/2017/08/31/hexo/index.html">
 <meta property="og:site_name" content="Z華X">
 <meta property="og:description" content="前言 前些天，自己刚刚接触hexo，并用hexo搭建了自己的博客，对hexo的强大搭建博客能力感到赞叹。用我的实际体验来说，你只要是有点计算机基础的人，完全可以轻松的使用hexo搭建起自己的博客。你要是用过github、oschina、gitcafe其中的一样，那对你来说，就可以分分钟上手了。其实网上使用hexo搭建博客的教程多的是，我自己也是跟着JoonWhee’s Blog的教程搭建的博客，那">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-31T10:05:56.092Z">
+<meta property="og:updated_time" content="2017-08-31T14:48:52.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo搭建真正属于自己的博客">
 <meta name="twitter:description" content="前言 前些天，自己刚刚接触hexo，并用hexo搭建了自己的博客，对hexo的强大搭建博客能力感到赞叹。用我的实际体验来说，你只要是有点计算机基础的人，完全可以轻松的使用hexo搭建起自己的博客。你要是用过github、oschina、gitcafe其中的一样，那对你来说，就可以分分钟上手了。其实网上使用hexo搭建博客的教程多的是，我自己也是跟着JoonWhee’s Blog的教程搭建的博客，那">
@@ -102,13 +105,13 @@
                 
                   <li> <a class="main-nav-link" href="/archives">归档</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
-                
                   <li> <a class="main-nav-link" href="/funnysite">酷站</a> </li>
                 
                   <li> <a class="main-nav-link" href="/collection">收藏</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/heart">鸡汤</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/web">web</a> </li>
                 
                   <li> <a class="main-nav-link" href="/about">关于</a> </li>
                 
@@ -186,6 +189,8 @@
 	</a>
 
       
+    <a class="article-category-link" href="/categories/blog/">blog</a>
+
       
 	<a class="article-views">
 	<span id="busuanzi_container_page_pv">
@@ -203,7 +208,8 @@
 <h3 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1.安装Git"></a>1.安装Git</h3><p>下载并安装git，如果你想了解点Git的基础命令，我推荐以下博文：<a href="http://www.cnblogs.com/cspku/articles/Git_cmds.html" target="_blank" rel="external">Git常用的基础命令</a>，<a href="http://blog.csdn.net/hcbbt/article/details/11651229/" target="_blank" rel="external">史上最全github使用方法：github入门到精通</a>,当然即使你不懂Git的命令，跟着本博文走，也完全没问题。</p>
 <h3 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h3><p>下载并安装Node.js，此处建议不要下载最新的v6开头的版本，否则每次执行hexo命令都会有提示，建议使用v5开头的版本，Node.js主要用于安装hexo，npm开头的命令都依赖于Node.js，此处我建议安装完毕后重启电脑，因为我当初安装完没重启，结果后面使用命令安装hexo的时候，提示无效的命令，因此推荐重启。当然，你也可以选择等到后面遇到问题，再选择重启。如果出现以下提示则代表你的Node.js没有安装或者还未生效，如果已经安装了则重启电脑，如果没安装则安装再重启电脑。（总之，重启大法好^^）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bash: nmp: <span class="built_in">command</span> not found</div></pre></td></tr></table></figure>
-<h3 id="3-安装hexo"><a href="#3-安装hexo" class="headerlink" title="3.安装hexo"></a>3.安装hexo</h3><p>安装前先介绍几个hexo常用的命令,#后面为注释。</p>
+<h3 id="3-安装hexo"><a href="#3-安装hexo" class="headerlink" title="3.安装hexo"></a>3.安装hexo</h3><a id="more"></a>
+<p>安装前先介绍几个hexo常用的命令,#后面为注释。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ hexo g <span class="comment">#完整命令为hexo generate，用于生成静态文件（在本地public)</span></div><div class="line">$ hexo s <span class="comment">#完整命令为hexo server，用于启动服务器，主要用来本地预览</span></div><div class="line">$ hexo d <span class="comment">#完整命令为hexo deploy，用于将本地文件发布到github上</span></div><div class="line">$ hexo n <span class="comment">#完整命令为hexo new，用于新建一篇文章</span></div></pre></td></tr></table></figure>
 <p>鼠标右键任意地方，选择Git Bash，使用以下命令安装hexo（ps：以下命令中的$符号只为了让教程和实际看起来一致，实际输入命令只需输入$ 后面的命令即可）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-cli -g</div></pre></td></tr></table></figure></p>
 <p>如果之后在使用的过程中，遇到以下的错误<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ERROR Deployer not found : github</div></pre></td></tr></table></figure></p>
@@ -283,6 +289,8 @@ var a = new Donate({
 
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
     </footer>
   </div>
   
@@ -360,13 +368,13 @@ var a = new Donate({
   
     <a href="/archives" class="mobile-nav-link">归档</a>
   
-    <a href="/categories" class="mobile-nav-link">分类</a>
-  
-    <a href="/tags" class="mobile-nav-link">标签</a>
-  
     <a href="/funnysite" class="mobile-nav-link">酷站</a>
   
     <a href="/collection" class="mobile-nav-link">收藏</a>
+  
+    <a href="/heart" class="mobile-nav-link">鸡汤</a>
+  
+    <a href="/web" class="mobile-nav-link">web</a>
   
     <a href="/about" class="mobile-nav-link">关于</a>
   

@@ -6,17 +6,20 @@
   <title>sha加密算法 | Z華X</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="c++" />
+  
   
   
   
   <meta name="description" content="交易安全的常用手段 在近年来发表的多个安全电子交易协议或标准中，均采纳了一些常用的安全电子交易的方法和手段。典型的方法和手段有以下几种：（1） 密码技术采用密码技术对信息加密，是最常用的安全交易手段。在电子商务中获得广泛应用的加密技术有以下两种：公共密钥和私用密钥（public key and private key ）这一加密方法亦称为RSA 编码法，是由Rivest， Shamir和 Adle">
+<meta name="keywords" content="c++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SHA加密算法">
 <meta property="og:url" content="http://xinghuazhang.xin/2017/08/31/SHA/index.html">
 <meta property="og:site_name" content="Z華X">
 <meta property="og:description" content="交易安全的常用手段 在近年来发表的多个安全电子交易协议或标准中，均采纳了一些常用的安全电子交易的方法和手段。典型的方法和手段有以下几种：（1） 密码技术采用密码技术对信息加密，是最常用的安全交易手段。在电子商务中获得广泛应用的加密技术有以下两种：公共密钥和私用密钥（public key and private key ）这一加密方法亦称为RSA 编码法，是由Rivest， Shamir和 Adle">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-31T10:29:16.442Z">
+<meta property="og:updated_time" content="2017-08-31T14:49:52.895Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SHA加密算法">
 <meta name="twitter:description" content="交易安全的常用手段 在近年来发表的多个安全电子交易协议或标准中，均采纳了一些常用的安全电子交易的方法和手段。典型的方法和手段有以下几种：（1） 密码技术采用密码技术对信息加密，是最常用的安全交易手段。在电子商务中获得广泛应用的加密技术有以下两种：公共密钥和私用密钥（public key and private key ）这一加密方法亦称为RSA 编码法，是由Rivest， Shamir和 Adle">
@@ -102,13 +105,13 @@
                 
                   <li> <a class="main-nav-link" href="/archives">归档</a> </li>
                 
-                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
-                
-                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
-                
                   <li> <a class="main-nav-link" href="/funnysite">酷站</a> </li>
                 
                   <li> <a class="main-nav-link" href="/collection">收藏</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/heart">鸡汤</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/web">web</a> </li>
                 
                   <li> <a class="main-nav-link" href="/about">关于</a> </li>
                 
@@ -186,6 +189,8 @@
 	</a>
 
       
+    <a class="article-category-link" href="/categories/加密算法/">加密算法</a>
+
       
 	<a class="article-views">
 	<span id="busuanzi_container_page_pv">
@@ -199,8 +204,7 @@
         <h4 id="交易安全的常用手段"><a href="#交易安全的常用手段" class="headerlink" title="交易安全的常用手段"></a>交易安全的常用手段</h4><blockquote>
 <p>在近年来发表的多个安全电子交易协议或标准中，均采纳了一些常用的安全电子交易的方法和手段。典型的方法和手段有以下几种：<br>（1） 密码技术<br>采用密码技术对信息加密，是最常用的安全交易手段。在电子商务中获得广泛应用的加密技术有以下两种：公共密钥和私用密钥（public key and private key ）<br>这一加密方法亦称为RSA 编码法，是由Rivest， Shamir和 Adlernan 三人所研究发明的。它利用两个很大的质数相乘所产生的乘积来加密。这两个质数无论哪一个先与原文件编码相乘，对文件加密，均可由另一个质数再相乘来解密。但要用一个质数来求出另一个质数，则是十分困难的。因此将这一对质数称为密钥对 (Key Pair)。在加密应用时，某个用户总是将一个密钥公开，让需发信的人员将信息用其公共密钥加密后发给该用户，而一旦信息加密后，只有该用户一个人知道的私用密钥才能解密。具有数字证书身份的人员的公共密钥可在网上查到，亦可在请对方发信息时罚动将公共密钥传给对方，这样保证在Internet 上转输信息的保密和安全。</p>
 <p>(2)数字摘要(digital digest)<br>　　这一加密方法亦称安全Hash编码法（SHA: Secure Hash Algorithm）或MD5 (MD Standards for Message Digest )，由 Ron Rivest 所设计。该编码法采用单向Hash函数将需加密的明文”摘要”成一串128bit的密文，这一串密文亦称为数字指纹(Finger Print) ，它有固定的长度，且不同的明文摘要成密文，其结果总是不同的，而同样的明文其摘要必定一致。这样这串摘要便可成为验证明文是否是”真身”的”指纹”了。<br>　　上述两种方法可结合起来使用，数字签名就是上述两法结合使用的实例。</p>
-<p>(3)数字签名(digital signature)<br>在书面文件上签名是确认文件的一种手段，签名的作用有两点，一是因为自己的签名难以否认，从而确认了文件已签署这一事实；二是因为签名不易仿冒，从而确定了文件是真的这一事实。数字签名与书面文件签名有相同之处，采用数字签名，也能确认以下两点：<br>　　<strong> 信息是由签名者发送的。 </strong><br>　　<strong> 信息自签名后到收到为止未曾作过任何修改。  </strong></p>
-<p>这样数字签名就可用来防止电子信息因易被修改而有人作伪；或冒用别人名义发送信息；或发出（收到）信件后又加以否认等情况发生。<br>　　数字签名并非用”手书签名”类型的图型标志，它采用了双重加密的方法来实现防伪、防赖。其原理为：<br>　　①　被发送文件用SHA编码加密产生128BIT的数字摘要。<br>　　②　发送方用自己的私用密钥对摘要再加密，这就形成了数字签名。<br>　　③　将原文和加密的摘要同时传给对方。<br>　　④　对方用发送方的公共密钥对摘要解密，同时对收到的文件用SHA编码加密产生又一摘要。<br>　　⑤　将解密后的摘要和收到的文件在接收方重新加密产生的摘要互对比。如两者一致，则说明传送过程中信息没有被破坏或篡改过。否则不然。</p>
+<p>(3)数字签名(digital signature)<br>在书面文件上签名是确认文件的一种手段，签名的作用有两点，一是因为自己的签名难以否认，从而确认了文件已签署这一事实；二是因为签名不易仿冒，从而确定了文件是真的这一事实。数字签名与书面文件签名有相同之处，采用数字签名，也能确认以下两点：<br>　　<strong> 信息是由签名者发送的。 </strong><br>　　<strong> 信息自签名后到收到为止未曾作过任何修改。  </strong><br><a id="more"></a><br>这样数字签名就可用来防止电子信息因易被修改而有人作伪；或冒用别人名义发送信息；或发出（收到）信件后又加以否认等情况发生。<br>　　数字签名并非用”手书签名”类型的图型标志，它采用了双重加密的方法来实现防伪、防赖。其原理为：<br>　　①　被发送文件用SHA编码加密产生128BIT的数字摘要。<br>　　②　发送方用自己的私用密钥对摘要再加密，这就形成了数字签名。<br>　　③　将原文和加密的摘要同时传给对方。<br>　　④　对方用发送方的公共密钥对摘要解密，同时对收到的文件用SHA编码加密产生又一摘要。<br>　　⑤　将解密后的摘要和收到的文件在接收方重新加密产生的摘要互对比。如两者一致，则说明传送过程中信息没有被破坏或篡改过。否则不然。</p>
 <p>(4) 数字时间戳（digital time-stamp）<br>　　交易文件中，时间是十分重要的信息。在书面合同中，文件签署的日期和签名一样均是十分重要的防止文件被伪造和篡改的关键性内容。<br>　　在电子交易中，同样需对交易文件的日期和时间信息采取安全措施，而数字时间戳服务（DTS：digital time-stamp service）就能提供电子文件发表时间的安全保护。<br>　　数字时间戳服务（DTS）是网上安全服务项目，由专门的机构提供。时间戳 (time-stamp)是一个经加密后形成的凭证文档，它包括三个部分：①需加时间戳的文件的摘要 (digest) ，②DTS收到文件的日期和时间，③DTS的数字签名。<br>　　时间戳产生的过程为：用户首先将需要加时间戳的文件用HASH编码加密形成摘要，然后将该摘要发送到DTS，DTS在加入了收到文件摘要的日期和时间信息后再对该文件加密（数字签名），然后送回用户。由 Bellcore 创造的DTS采用如下的过程：加密时将摘要信息归并到二叉树的数据结构；再将二叉树的根值发表在报纸上，这样更有效地为文件发表时间提供了佐证。注意，书面签署文件的时间是由签署人自己写上的，而数字时间戳则不然，它是由认证单位DTS来加的，以DTS收到文件的时间为依据。因此，时间戳也可作为科学家的科学发明文献的时间认证。</p>
 <p>(5)数字证书（digital certificate, digital ID）<br>　　数字证书是用电子手段来证实一个用户的身份和对网络资源的访问的权限。在网上的电子交易中，如双方出示了各自的数字证书，并用它来进行交易操作，那么双方都可不必为对方身份的真伪担心。<br>　　数字证书可用于电子邮件、电子商务、群件、电子基金转移等各种用途。<br>　　数字证书的内部格式是由CCITT X.509国际标准所规定的，它包含了以下几点：<br>　　·数字证书拥有者的姓名<br>　　·数字证书拥有者的公共密钥<br>　　·公共密钥的有效期<br>　　·颁发数字证书的单位<br>　　·数字证书的序列号 (Serial number)<br>　　·颁发数字证书单位的数字签名</p>
 <p>(6)认证中心 (CA Certification Authority)<br>　　在电子交易中，无论是数字时间戳服务（DTS）还是数字证书 (Digital ID)的发放，都不是靠交易的双方自己能完成的，而需要有一个具有权威性和公正性的第三方来完成。认证中心 (CA)就是承担网上安全电子交易认证服务、能签发数字证书、并能确认用户身份的服务机构。认证中心通常是企业性的服务机构，主要任务是受理数字证书的申请、签发及对数字证书的管理。认证中心依据认证操作规定 (CPS：Certification Practice Statement)来实施服务操作。</p>
@@ -256,6 +260,8 @@ var a = new Donate({
 
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li></ul>
+
     </footer>
   </div>
   
@@ -338,13 +344,13 @@ var a = new Donate({
   
     <a href="/archives" class="mobile-nav-link">归档</a>
   
-    <a href="/categories" class="mobile-nav-link">分类</a>
-  
-    <a href="/tags" class="mobile-nav-link">标签</a>
-  
     <a href="/funnysite" class="mobile-nav-link">酷站</a>
   
     <a href="/collection" class="mobile-nav-link">收藏</a>
+  
+    <a href="/heart" class="mobile-nav-link">鸡汤</a>
+  
+    <a href="/web" class="mobile-nav-link">web</a>
   
     <a href="/about" class="mobile-nav-link">关于</a>
   
