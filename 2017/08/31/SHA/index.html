@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>sha加密算法 | Z華X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  
+  <meta name="description" content="交易安全的常用手段 在近年来发表的多个安全电子交易协议或标准中，均采纳了一些常用的安全电子交易的方法和手段。典型的方法和手段有以下几种：（1） 密码技术采用密码技术对信息加密，是最常用的安全交易手段。在电子商务中获得广泛应用的加密技术有以下两种：公共密钥和私用密钥（public key and private key ）这一加密方法亦称为RSA 编码法，是由Rivest， Shamir和 Adle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SHA加密算法">
+<meta property="og:url" content="http://xinghuazhang.xin/2017/08/31/SHA/index.html">
+<meta property="og:site_name" content="Z華X">
+<meta property="og:description" content="交易安全的常用手段 在近年来发表的多个安全电子交易协议或标准中，均采纳了一些常用的安全电子交易的方法和手段。典型的方法和手段有以下几种：（1） 密码技术采用密码技术对信息加密，是最常用的安全交易手段。在电子商务中获得广泛应用的加密技术有以下两种：公共密钥和私用密钥（public key and private key ）这一加密方法亦称为RSA 编码法，是由Rivest， Shamir和 Adle">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-08-31T10:29:16.442Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SHA加密算法">
+<meta name="twitter:description" content="交易安全的常用手段 在近年来发表的多个安全电子交易协议或标准中，均采纳了一些常用的安全电子交易的方法和手段。典型的方法和手段有以下几种：（1） 密码技术采用密码技术对信息加密，是最常用的安全交易手段。在电子商务中获得广泛应用的加密技术有以下两种：公共密钥和私用密钥（public key and private key ）这一加密方法亦称为RSA 编码法，是由Rivest， Shamir和 Adle">
+  
+    <link rel="alternate" href="/atom.xml" title="Z華X" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/categories">分类</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/tags">标签</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/funnysite">酷站</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/collection">收藏</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/mybooks">🎁</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-SHA" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      SHA加密算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/08/31/SHA/" class="article-date">
+	  <time datetime="2017-08-31T10:05:25.450Z" itemprop="datePublished">2017-08-31</time>
+	</a>
+
+      
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="交易安全的常用手段"><a href="#交易安全的常用手段" class="headerlink" title="交易安全的常用手段"></a>交易安全的常用手段</h4><blockquote>
+<p>在近年来发表的多个安全电子交易协议或标准中，均采纳了一些常用的安全电子交易的方法和手段。典型的方法和手段有以下几种：<br>（1） 密码技术<br>采用密码技术对信息加密，是最常用的安全交易手段。在电子商务中获得广泛应用的加密技术有以下两种：公共密钥和私用密钥（public key and private key ）<br>这一加密方法亦称为RSA 编码法，是由Rivest， Shamir和 Adlernan 三人所研究发明的。它利用两个很大的质数相乘所产生的乘积来加密。这两个质数无论哪一个先与原文件编码相乘，对文件加密，均可由另一个质数再相乘来解密。但要用一个质数来求出另一个质数，则是十分困难的。因此将这一对质数称为密钥对 (Key Pair)。在加密应用时，某个用户总是将一个密钥公开，让需发信的人员将信息用其公共密钥加密后发给该用户，而一旦信息加密后，只有该用户一个人知道的私用密钥才能解密。具有数字证书身份的人员的公共密钥可在网上查到，亦可在请对方发信息时罚动将公共密钥传给对方，这样保证在Internet 上转输信息的保密和安全。</p>
+<p>(2)数字摘要(digital digest)<br>　　这一加密方法亦称安全Hash编码法（SHA: Secure Hash Algorithm）或MD5 (MD Standards for Message Digest )，由 Ron Rivest 所设计。该编码法采用单向Hash函数将需加密的明文”摘要”成一串128bit的密文，这一串密文亦称为数字指纹(Finger Print) ，它有固定的长度，且不同的明文摘要成密文，其结果总是不同的，而同样的明文其摘要必定一致。这样这串摘要便可成为验证明文是否是”真身”的”指纹”了。<br>　　上述两种方法可结合起来使用，数字签名就是上述两法结合使用的实例。</p>
+<p>(3)数字签名(digital signature)<br>在书面文件上签名是确认文件的一种手段，签名的作用有两点，一是因为自己的签名难以否认，从而确认了文件已签署这一事实；二是因为签名不易仿冒，从而确定了文件是真的这一事实。数字签名与书面文件签名有相同之处，采用数字签名，也能确认以下两点：<br>　　<strong> 信息是由签名者发送的。 </strong><br>　　<strong> 信息自签名后到收到为止未曾作过任何修改。  </strong></p>
+<p>这样数字签名就可用来防止电子信息因易被修改而有人作伪；或冒用别人名义发送信息；或发出（收到）信件后又加以否认等情况发生。<br>　　数字签名并非用”手书签名”类型的图型标志，它采用了双重加密的方法来实现防伪、防赖。其原理为：<br>　　①　被发送文件用SHA编码加密产生128BIT的数字摘要。<br>　　②　发送方用自己的私用密钥对摘要再加密，这就形成了数字签名。<br>　　③　将原文和加密的摘要同时传给对方。<br>　　④　对方用发送方的公共密钥对摘要解密，同时对收到的文件用SHA编码加密产生又一摘要。<br>　　⑤　将解密后的摘要和收到的文件在接收方重新加密产生的摘要互对比。如两者一致，则说明传送过程中信息没有被破坏或篡改过。否则不然。</p>
+<p>(4) 数字时间戳（digital time-stamp）<br>　　交易文件中，时间是十分重要的信息。在书面合同中，文件签署的日期和签名一样均是十分重要的防止文件被伪造和篡改的关键性内容。<br>　　在电子交易中，同样需对交易文件的日期和时间信息采取安全措施，而数字时间戳服务（DTS：digital time-stamp service）就能提供电子文件发表时间的安全保护。<br>　　数字时间戳服务（DTS）是网上安全服务项目，由专门的机构提供。时间戳 (time-stamp)是一个经加密后形成的凭证文档，它包括三个部分：①需加时间戳的文件的摘要 (digest) ，②DTS收到文件的日期和时间，③DTS的数字签名。<br>　　时间戳产生的过程为：用户首先将需要加时间戳的文件用HASH编码加密形成摘要，然后将该摘要发送到DTS，DTS在加入了收到文件摘要的日期和时间信息后再对该文件加密（数字签名），然后送回用户。由 Bellcore 创造的DTS采用如下的过程：加密时将摘要信息归并到二叉树的数据结构；再将二叉树的根值发表在报纸上，这样更有效地为文件发表时间提供了佐证。注意，书面签署文件的时间是由签署人自己写上的，而数字时间戳则不然，它是由认证单位DTS来加的，以DTS收到文件的时间为依据。因此，时间戳也可作为科学家的科学发明文献的时间认证。</p>
+<p>(5)数字证书（digital certificate, digital ID）<br>　　数字证书是用电子手段来证实一个用户的身份和对网络资源的访问的权限。在网上的电子交易中，如双方出示了各自的数字证书，并用它来进行交易操作，那么双方都可不必为对方身份的真伪担心。<br>　　数字证书可用于电子邮件、电子商务、群件、电子基金转移等各种用途。<br>　　数字证书的内部格式是由CCITT X.509国际标准所规定的，它包含了以下几点：<br>　　·数字证书拥有者的姓名<br>　　·数字证书拥有者的公共密钥<br>　　·公共密钥的有效期<br>　　·颁发数字证书的单位<br>　　·数字证书的序列号 (Serial number)<br>　　·颁发数字证书单位的数字签名</p>
+<p>(6)认证中心 (CA Certification Authority)<br>　　在电子交易中，无论是数字时间戳服务（DTS）还是数字证书 (Digital ID)的发放，都不是靠交易的双方自己能完成的，而需要有一个具有权威性和公正性的第三方来完成。认证中心 (CA)就是承担网上安全电子交易认证服务、能签发数字证书、并能确认用户身份的服务机构。认证中心通常是企业性的服务机构，主要任务是受理数字证书的申请、签发及对数字证书的管理。认证中心依据认证操作规定 (CPS：Certification Practice Statement)来实施服务操作。</p>
+</blockquote>
+<h4 id="如何使用SHA加密敏感的数据"><a href="#如何使用SHA加密敏感的数据" class="headerlink" title="如何使用SHA加密敏感的数据"></a>如何使用SHA加密敏感的数据</h4><blockquote>
+<p>问题一 :<br>当处理一个订单的时候，我们必须要进行搜索，把呈报的信用卡号码与第三方提供的热卡(失窃的或者封锁的卡)列表进行对照。根据支付卡行业数据安全标准，即使一个卡在这个列表上，我们也不能把这个卡的号码不进行任何加密处理就放在那里。我们正在考虑使用SHA-1(安全散列算法-1)把这些号码转换为它们的散列值，然后在我们处理一项支付的时候再进行对比。我们喜欢SHA-1，因为它不需要任何密钥管理功能。然而，我们担心散列值冲突或者误报问题，所谓误报就是错误地把好卡识别为热卡。像这样使用SHA-1是不是一种好方法?</p>
+<p>　　<strong>答:使用SHA-1创建信用卡号码的散列值以避免用明文形式存储信用卡是一种好方法。此外，由于散列值冲突的机会很少，你不可能得到误报。让我们看一下SHA-1和在这种情况下使用它为什么是安全的。</strong></p>
+<p>问题二:<br>当处理一个订单的时候，我们必须要进行搜索，把呈报的信用卡号码与第三方提供的热卡(失窃的或者封锁的卡)列表进行对照。根据支付卡行业数据安全标准，即使一个卡在这个列表上，我们也不能把这个卡的号码不进行任何加密处理就放在那里。我们正在考虑使用SHA-1(安全散列算法-1)把这些号码转换为它们的散列值，然后在我们处理一项支付的时候再进行对比。我们喜欢SHA-1，因为它不需要任何密钥管理功能。然而，我们担心散列值冲突或者误报问题，所谓误报就是错误地把好卡识别为热卡。像这样使用SHA-1是不是一种好方法?<br>　　<strong>答:使用SHA-1创建信用卡号码的散列值以避免用明文形式存储信用卡是一种好方法。此外，由于散列值冲突的机会很少，你不可能得到误报。让我们看一下SHA-1和在这种情况下使用它为什么是安全的。</strong><br>　　安全散列算法(SHA)家族是由这种算法设计的一套相关的密码散列功能，能够根据任何种类的数据创建一个散列值，这些数据包括文件、口令和本案中的信用卡号码。这个值实际上对于输入的数据来说是独一无二的，因此，由于雪崩效应(avalanche effect)，数据中很小的变化都会导致出现完全不同的散列值。此外，没有切实可行的方法计算一个将导致一个理想的散列值的特定的数据输入，因此使用这个散列值恢复原来的数据是不可能的。这个家族中最常用的功能是SHA-1。各种流行的安全设备和协议都使用SHA-1，如SSL、PGP、S/MIME和IPsec等。<br>　　你担心的散列值冲突问题可能是2005年8月份发生的一次攻击的结果。那种攻击需要低于2^63(9,223,372,036,854,780,000)的散列值计算以发现在完整版本的SHA-1中的冲突。一个冲突意味着两块数据有同样的散列值。这种攻击需要的计算复杂性低于蛮力搜索冲突。蛮力搜索需要2^80计算。根据学术密码学，这可以认为是一种安全突破。虽然一些观察人士担心大规模分布式互联网搜索可能发现SHA-1的冲突，但是，这并不意味着这种攻击是实际上可以利用的。不管怎样，有趣的是需要指出，在2005年9月，微软宣布它在任何功能中都将停止使用DES、MD4、MD5和SHA-1加密算法。<br>　　这样，为什么使用SHA-1加密你的信用卡号码仍是安全的呢?因为两个信用卡号码的散列值相同的机会是非常小的，你不可能发现一个好卡和坏卡的散列值是一样的，从而排除了误报的可能性。此外，这种攻击是一种冲突(collision)攻击，而不是pre-image攻击。正如我以前指出的那样，冲突攻击是找到拥有同样的散列值的两块数据，但是，攻击者并不知道这个散列值是什么，因此就不能破解使用SHA-1检查数据散列值变化的工具。另一方面，pre-image攻击能够让攻击者找到一个坏的信用卡号码。这个号码能够让散列值功能产生一个非法的信用卡的散列值。然而，因为你在使用一个黑名单，攻击者不能利用这个功能，因为这个对比过程能发现黑名单上的坏卡号码。<br>　　如果你仍然感到担心，你可以考虑使用SHA-224、SHA-256、SHA-384或者SHA512。有时候，这些方法统称为SHA-2。然而，这需要额外的存储空间，因为SHA-1创建的散列值的大小的160字节，而SHA-224创建的散列值是224个字节。另外，对比的过程也要慢一些。</p>
+</blockquote>
+<p>SHA算法的具体介绍可参考<a href="https://baike.baidu.com/item/SHA-1/1699692" target="_blank" rel="external">SHA-1</a>、<a href="https://baike.baidu.com/item/SHA/9533316?fr=aladdin" target="_blank" rel="external">SHA</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://github.com/AIRobotZhang/AIRobotZhang.github.io/raw/master/WeChat.jpg',
+  alipayImage: 'https://github.com/AIRobotZhang/AIRobotZhang.github.io/raw/master/AliPayQR.jpg'
+});
+</script>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/31/skiplist/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">宠物店满意度(跳表skiplist的应用)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#交易安全的常用手段"><span class="nav-number">1.</span> <span class="nav-text">交易安全的常用手段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用SHA加密敏感的数据"><span class="nav-number">2.</span> <span class="nav-text">如何使用SHA加密敏感的数据</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2017 - 2017 Z華X All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/categories" class="mobile-nav-link">分类</a>
+  
+    <a href="/tags" class="mobile-nav-link">标签</a>
+  
+    <a href="/funnysite" class="mobile-nav-link">酷站</a>
+  
+    <a href="/collection" class="mobile-nav-link">收藏</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+    <a href="/mybooks" class="mobile-nav-link">🎁</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Z華X
+          </div>
+          <div class="panel-body">
+            Copyright © 2017 zhangxinghua All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
