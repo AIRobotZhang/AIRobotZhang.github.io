@@ -3,22 +3,28 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Z華X</title>
+  <title>python &amp; aiml 搭建聊天机器人 | Z華X</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="keywords" content="aimlpython" />
   
   
   
-  <meta name="description" content="越努力越幸运">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Z華X">
-<meta property="og:url" content="http://xinghuazhang.xin/index.html">
+  
+  <meta name="description" content="什么是aiml？AIML全名为Artificial Intelligence Markup Language（人工智能标记语言），是一种创建自然语言软件代理的XML语言，是由RichardS.Wallace博士和Alicebot开源软件组织于1995-2000年间发明创造的。AIML是一种为了匹配模式和确定响应而进行规则定义的 XML 格式。AIML的设计目标如下：  AIML应当为大众所易学易会">
+<meta name="keywords" content="aiml,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python &amp; aiml 搭建聊天机器人">
+<meta property="og:url" content="http://xinghuazhang.xin/2017/09/01/aiml/index.html">
 <meta property="og:site_name" content="Z華X">
-<meta property="og:description" content="越努力越幸运">
+<meta property="og:description" content="什么是aiml？AIML全名为Artificial Intelligence Markup Language（人工智能标记语言），是一种创建自然语言软件代理的XML语言，是由RichardS.Wallace博士和Alicebot开源软件组织于1995-2000年间发明创造的。AIML是一种为了匹配模式和确定响应而进行规则定义的 XML 格式。AIML的设计目标如下：  AIML应当为大众所易学易会">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xinghuazhang.xin/gallery/aiml1.png">
+<meta property="og:updated_time" content="2017-09-01T12:16:14.703Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Z華X">
-<meta name="twitter:description" content="越努力越幸运">
+<meta name="twitter:title" content="Python &amp; aiml 搭建聊天机器人">
+<meta name="twitter:description" content="什么是aiml？AIML全名为Artificial Intelligence Markup Language（人工智能标记语言），是一种创建自然语言软件代理的XML语言，是由RichardS.Wallace博士和Alicebot开源软件组织于1995-2000年间发明创造的。AIML是一种为了匹配模式和确定响应而进行规则定义的 XML 格式。AIML的设计目标如下：  AIML应当为大众所易学易会">
+<meta name="twitter:image" content="http://xinghuazhang.xin/gallery/aiml1.png">
   
     <link rel="alternate" href="/atom.xml" title="Z華X" type="application/atom+xml">
   
@@ -47,11 +53,13 @@
   <link rel="stylesheet" href="/css/bootstrap.css" >
 
   
-    <link rel="stylesheet" href="/css/home.css" >
+    <link rel="stylesheet" href="/css/dialog.css">
   
 
   
 
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
   
 
   
@@ -64,249 +72,113 @@
 
 
 
-  <body>
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
-  
-    <header id="header">
-
-	<!-- 背景图模式 -->
-	
-
-    
-      <div id="intrologo" class="intro-logo" style="background-position:center; background-repeat:no-repeat; background-image: url(); background-size: auto 100%;">
-
-      <!-- Support rolling -->  
-        
-        <section class="awSlider">
-          <div class="carousel slide carousel-fade " data-ride="carousel">
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-               
-                  
-                    <div class="item active">
-                  
-                    <img id="carousel-img0" src="/css/images/HIT1.jpg">
-                  </div>
-
-                  <!-- 自适应大图 -->
-                  <script>
-                      var img0 = new Image();
-                      var imageTag0 = document.getElementById("carousel-img0");
-                      img0.src = imageTag0.src;
-                      img0.onload=function(){
-                        if (img0.width / img0.height <= document.body.clientWidth / document.body.clientHeight) {
-                          imageTag0.style.width = document.body.clientWidth + "px";
-                        } else {
-                          imageTag0.style.height = document.body.clientHeight + "px";
-                          imageTag0.style.marginLeft = -(document.body.clientHeight * img0.width / img0.height - document.body.clientWidth) / 2 + "px";
-                        }
-                      };
-                  </script>
-                
-                  
-                    <div class="item">
-                  
-                    <img id="carousel-img1" src="/css/images/HIT2.jpg">
-                  </div>
-
-                  <!-- 自适应大图 -->
-                  <script>
-                      var img1 = new Image();
-                      var imageTag1 = document.getElementById("carousel-img1");
-                      img1.src = imageTag1.src;
-                      img1.onload=function(){
-                        if (img1.width / img1.height <= document.body.clientWidth / document.body.clientHeight) {
-                          imageTag1.style.width = document.body.clientWidth + "px";
-                        } else {
-                          imageTag1.style.height = document.body.clientHeight + "px";
-                          imageTag1.style.marginLeft = -(document.body.clientHeight * img1.width / img1.height - document.body.clientWidth) / 2 + "px";
-                        }
-                      };
-                  </script>
-                
-                  
-                    <div class="item">
-                  
-                    <img id="carousel-img2" src="/css/images/AI1.jpg">
-                  </div>
-
-                  <!-- 自适应大图 -->
-                  <script>
-                      var img2 = new Image();
-                      var imageTag2 = document.getElementById("carousel-img2");
-                      img2.src = imageTag2.src;
-                      img2.onload=function(){
-                        if (img2.width / img2.height <= document.body.clientWidth / document.body.clientHeight) {
-                          imageTag2.style.width = document.body.clientWidth + "px";
-                        } else {
-                          imageTag2.style.height = document.body.clientHeight + "px";
-                          imageTag2.style.marginLeft = -(document.body.clientHeight * img2.width / img2.height - document.body.clientWidth) / 2 + "px";
-                        }
-                      };
-                  </script>
-                
-                  
-                    <div class="item">
-                  
-                    <img id="carousel-img3" src="https://source.unsplash.com/collection/954550/1920x1080">
-                  </div>
-
-                  <!-- 自适应大图 -->
-                  <script>
-                      var img3 = new Image();
-                      var imageTag3 = document.getElementById("carousel-img3");
-                      img3.src = imageTag3.src;
-                      img3.onload=function(){
-                        if (img3.width / img3.height <= document.body.clientWidth / document.body.clientHeight) {
-                          imageTag3.style.width = document.body.clientWidth + "px";
-                        } else {
-                          imageTag3.style.height = document.body.clientHeight + "px";
-                          imageTag3.style.marginLeft = -(document.body.clientHeight * img3.width / img3.height - document.body.clientWidth) / 2 + "px";
-                        }
-                      };
-                  </script>
-                
-            </div>
-
-            <!-- Controls -->
-            <a class="left carousel-control" href=".carousel" role="button" data-slide="prev">
-              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-              <span class="sr-only">Geri</span>
-            </a>
-            <a class="right carousel-control" href=".carousel" role="button" data-slide="next">
-              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              <span class="sr-only">İleri</span>
-            </a>
-          </div>
-        </section>
-        <script>
-          $('section.awSlider .carousel').carousel({
-              pause: '',
-              interval: 5000
-          });
-          var startImage = $('section.awSlider .item.active > img').attr('src');
-          $('section.awSlider .carousel').on('slid.bs.carousel', function () {
-              var bscn = $(this).find('.item.active > img').attr('src');
-              $('section.awSlider > img').attr('src', bscn);
-          });
-        </script>
-      
-
-    
- 
-
-
-    <canvas width="100%" height="100%"></canvas>
-    <script>
-      var c = document.getElementsByTagName('canvas')[0],
-          x = c.getContext('2d'),
-          w = window.innerWidth,
-          h = window.innerHeight,
-          pr = window.devicePixelRatio || 1,
-          f = 90,
-          q,
-          m = Math,
-          r = 0,
-          u = m.PI*2,
-          v = m.cos,
-          z = m.random
-      c.width = w*pr
-      c.height = h*pr
-      x.scale(pr, pr)
-      x.globalAlpha = 0.6
-
-      <!-- 折线Polyline背景 -->
-      
-		 function redraw(){
-		 	var pattern = Trianglify({
-				width: window.innerWidth,
-				height: window.innerHeight
-			});
-            pattern.canvas(c)
-        }
-        document.getElementById("intrologo").onclick = redraw
-        document.getElementById("intrologo").ontouchstart = redraw
-		redraw()
-      
-    </script>
-    
-
-    
-      <div id="homelogo" class="homelogo" style="background: rgba(255,255,255,1);"> 
-    
-
-        
-          <div class="homelogoback"  style="border: 1px solid #404040;" >
-            <h1><a href="#content" id="logo">Z華X</a></h1>
-            <h3>越努力越幸运</h3>
-            <h5>zhangxinghua</h5>
-            <!-- <p><a href="https://github.com/iTimeTraveler" target="_blank">Github</a></p> -->
-          </div>
-        
-    
-    </div>
-  </div>
-
-  <!-- 自适应主页背景大图 -->
-  
-
- <!-- home_logo_image居中 -->
- 
-    <script>
-        var homelogodiv = document.getElementById("homelogo");
-        if (document.all.homelogo.offsetWidth > document.body.clientWidth) {
-          homelogodiv.style.width = document.body.clientWidth + "px";
-          homelogodiv.style.marginLeft = document.body.clientWidth * -0.5 + "px";
-        } else {
-          homelogodiv.style.width = homelogodiv.clientWidth  + "px";
-          homelogodiv.style.marginLeft = (homelogodiv.clientWidth)  * -0.5 + "px";
-        }
-    </script>
-  
-
-  <div class="intro-navigate">
-      <p class="navigater-list">
-        
-          <a id="beautifont" class="main-nav-link" href="/">首页</a>
-        
-          <a id="beautifont" class="main-nav-link" href="/archives">归档</a>
-        
-          <a id="beautifont" class="main-nav-link" href="/funnysite">酷站</a>
-        
-          <a id="beautifont" class="main-nav-link" href="/collection">收藏</a>
-        
-          <a id="beautifont" class="main-nav-link" href="/heart">鸡汤</a>
-        
-          <a id="beautifont" class="main-nav-link" href="/web">web</a>
-        
-          <a id="beautifont" class="main-nav-link" href="/about">关于</a>
-        
-          <a id="beautifont" class="main-nav-link" href="/mybooks">🎁</a>
-        
-      </p>
-  </div>
-
-</header>
   
   <div id="container">
     <div id="wrap">
       
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/funnysite">酷站</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/collection">收藏</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/heart">鸡汤</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/web">web</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/mybooks">🎁</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;">
-  
-    <article id="post-aiml"  class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-aiml" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     
     
       <header class="article-header">
         
   
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/09/01/aiml/">Python &amp; aiml 搭建聊天机器人</a>
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Python &amp; aiml 搭建聊天机器人
     </h1>
   
 
@@ -322,6 +194,12 @@
     <a class="article-category-link" href="/categories/Robot/">Robot</a>
 
       
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
     </div>
     <div class="article-entry" itemprop="articleBody">
       
@@ -366,6 +244,44 @@
     </div>
     <footer class="article-footer">
       
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://github.com/AIRobotZhang/AIRobotZhang.github.io/raw/master/WeChat.jpg',
+  alipayImage: 'https://github.com/AIRobotZhang/AIRobotZhang.github.io/raw/master/Alipay.jpg'
+});
+</script>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aiml/">aiml</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
@@ -373,240 +289,33 @@
     </footer>
   </div>
   
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-Partition"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
     
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/31/Partition/">高级数据结构——划分树</a>
-    </h1>
   
+    <a href="/2017/08/31/Partition/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">高级数据结构——划分树</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/08/31/Partition/" class="article-date">
-	  <time datetime="2017-08-31T13:24:17.149Z" itemprop="datePublished">2017-08-31</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/树形结构/">树形结构</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><p>1.了解并熟练掌握划分树的基本原理<br>2.熟练掌握划分树的建树及查找过程<br>3.明确划分树的优势及应用<br>4.对划分树进行性能评价分析</p>
-<h2 id="实验背景"><a href="#实验背景" class="headerlink" title="实验背景"></a>实验背景</h2><p>在计算机数学中，划分(partition)是指非空集合A的非空子集的一个集合P满足以下的两个条件：1、A的每个元素属于P中的某个集合；2、如果A1和A2是P中不同的元素．那么A1 ∩A2= Ø。划分又叫商集。划分树就是在此基础上与线段树结合的产物，主要用于快速求出(在log n的时间复杂度内)序列区间的第k大值。其基本思想就是对于某个区间，把它划分成两个子区间。左边区间的任一个数都小于右边区间的所有数，同时记录当前区间被分配到左子区间的数的数目。查找时通过记录进入左子树的数的个数，确定下一个查找区问，最后范围缩小到1，就找到了。</p>
-<h2 id="实验要求及实验环境"><a href="#实验要求及实验环境" class="headerlink" title="实验要求及实验环境"></a>实验要求及实验环境</h2><h3 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h3><ul>
-<li>完成划分树的基本操作</li>
-<li>明确划分树的优势：查找固定区间的第k大/小数</li>
-<li>将划分树与归并树及朴素查找算法进行性能比较分析</li>
-<li>实现一个划分树的具体应用</li>
-</ul>
-<h3 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h3><p>Code::Blocks + Eclipse Java Neon</p>
-<h2 id="完成进度"><a href="#完成进度" class="headerlink" title="完成进度"></a>完成进度</h2><p>1.完成了划分树的建树及基本操作（查找、删除、添加）<br>2.明确了划分树在区间查询方面的优势<br>3.将划分树与朴素算法、归并树算法、最大/小堆算法进行了性能比较分析<br>4.将划分树的查询优势应用于改进日常生活中的查询问题</p>
-<h2 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h2>
-        <!-- 实验目的1.了解并熟练掌握划分树的基本原理2.熟练掌握划分树的建树及查找过程3.明确划分树的优势及应用4.对划分树进行性能评价分析
-实验背景在计算机数学中，划分(partition)是指非空集合A的非空子集的一个集合P满足以下的两个条件：1、A的每个元素属于P中的某个集合；2、如果A1和A2是P中不同的元素．那么A1 ∩A2= Ø。划分又叫商集。划分树就是在此基础上与线段树结合的产物，主要用......  -->
-        <p class="article-more-link">
-          <a href="/2017/08/31/Partition/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
 <!-- Table of Contents -->
 
-  
-    <article id="post-SHA"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
     
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是aiml？"><span class="nav-number">1.</span> <span class="nav-text">什么是aiml？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Python-aiml库"><span class="nav-number">2.1.</span> <span class="nav-text">安装Python aiml库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取Alice资源"><span class="nav-number">2.2.</span> <span class="nav-text">获取Alice资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python下加载Alice"><span class="nav-number">2.3.</span> <span class="nav-text">Python下加载Alice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建标准启动文件"><span class="nav-number">2.4.</span> <span class="nav-text">创建标准启动文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个AIML文件"><span class="nav-number">2.5.</span> <span class="nav-text">创建一个AIML文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#随机响应"><span class="nav-number">2.5.1.</span> <span class="nav-text">随机响应</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用已存在的AIML文件"><span class="nav-number">2.6.</span> <span class="nav-text">使用已存在的AIML文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试新建的机器人"><span class="nav-number">2.7.</span> <span class="nav-text">测试新建的机器人</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加速Brain加载"><span class="nav-number">2.8.</span> <span class="nav-text">加速Brain加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增加Python命令"><span class="nav-number">2.9.</span> <span class="nav-text">增加Python命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话与断言"><span class="nav-number">2.10.</span> <span class="nav-text">会话与断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aiml可以用来实现对话机器人，但是用于中文有以下问题："><span class="nav-number">2.11.</span> <span class="nav-text">aiml可以用来实现对话机器人，但是用于中文有以下问题：</span></a></li></ol></li></ol>
     
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/31/SHA/">SHA加密算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/08/31/SHA/" class="article-date">
-	  <time datetime="2017-08-31T10:05:25.450Z" itemprop="datePublished">2017-08-31</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/加密算法/">加密算法</a>
-
-      
     </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="交易安全的常用手段"><a href="#交易安全的常用手段" class="headerlink" title="交易安全的常用手段"></a>交易安全的常用手段</h4><blockquote>
-<p>在近年来发表的多个安全电子交易协议或标准中，均采纳了一些常用的安全电子交易的方法和手段。典型的方法和手段有以下几种：<br>（1） 密码技术<br>采用密码技术对信息加密，是最常用的安全交易手段。在电子商务中获得广泛应用的加密技术有以下两种：公共密钥和私用密钥（public key and private key ）<br>这一加密方法亦称为RSA 编码法，是由Rivest， Shamir和 Adlernan 三人所研究发明的。它利用两个很大的质数相乘所产生的乘积来加密。这两个质数无论哪一个先与原文件编码相乘，对文件加密，均可由另一个质数再相乘来解密。但要用一个质数来求出另一个质数，则是十分困难的。因此将这一对质数称为密钥对 (Key Pair)。在加密应用时，某个用户总是将一个密钥公开，让需发信的人员将信息用其公共密钥加密后发给该用户，而一旦信息加密后，只有该用户一个人知道的私用密钥才能解密。具有数字证书身份的人员的公共密钥可在网上查到，亦可在请对方发信息时罚动将公共密钥传给对方，这样保证在Internet 上转输信息的保密和安全。</p>
-<p>(2)数字摘要(digital digest)<br>　　这一加密方法亦称安全Hash编码法（SHA: Secure Hash Algorithm）或MD5 (MD Standards for Message Digest )，由 Ron Rivest 所设计。该编码法采用单向Hash函数将需加密的明文”摘要”成一串128bit的密文，这一串密文亦称为数字指纹(Finger Print) ，它有固定的长度，且不同的明文摘要成密文，其结果总是不同的，而同样的明文其摘要必定一致。这样这串摘要便可成为验证明文是否是”真身”的”指纹”了。<br>　　上述两种方法可结合起来使用，数字签名就是上述两法结合使用的实例。</p>
-<p>(3)数字签名(digital signature)<br>在书面文件上签名是确认文件的一种手段，签名的作用有两点，一是因为自己的签名难以否认，从而确认了文件已签署这一事实；二是因为签名不易仿冒，从而确定了文件是真的这一事实。数字签名与书面文件签名有相同之处，采用数字签名，也能确认以下两点：<br>　　<strong> 信息是由签名者发送的。 </strong><br>　　<strong> 信息自签名后到收到为止未曾作过任何修改。  </strong></p>
-</blockquote>
-        <!-- 交易安全的常用手段
-在近年来发表的多个安全电子交易协议或标准中，均采纳了一些常用的安全电子交易的方法和手段。典型的方法和手段有以下几种：（1） 密码技术采用密码技术对信息加密，是最常用的安全交易手段。在电子商务中获得广泛应用的加密技术有以下两种：公共密钥和私用密钥（public key and private key ）这一加密方法亦称为RSA 编码法，是由Rivest， Shamir和 A......  -->
-        <p class="article-more-link">
-          <a href="/2017/08/31/SHA/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-skiplist"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/31/skiplist/">宠物店满意度(跳表skiplist的应用)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/08/31/skiplist/" class="article-date">
-	  <time datetime="2017-08-31T09:29:04.832Z" itemprop="datePublished">2017-08-31</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/链表/">链表</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><blockquote>
-<p>宠物店领养满意度a，宠物店给每只宠物赋予一个特征值（资质），特征值越高说明宠物的资质越高，越稀有，而领养者也需出示自己想要领养宠物的资质，且一天中的领养者按资质要求从低到高依次满足，所领养宠物的资质小于等于领养者所需资质，如果宠物店存在小于等于领养者要求资质宠物的话，否则，领养者则领养比其资质大且最接近的宠物。<br><strong>要求：当一天中领养者的数量小于宠物店的宠物数量时，由领养者领养宠物；否则，宠物与领养者的位置对换，即由宠物按先前规则挑选领养者，如果在当天存在领养者未领养宠物，则自动参与以后的宠物领养。</strong></p>
-<p>读入文件（一年内该宠物店顾客认领及宠物引入情况）：<br>文件第一列为0/1（0代表引入宠物，1代表领养者认领宠物），后面几列是0~9的数字（代表动物的资质或领养者所需动物的资质）。</p>
-<p>输出：<br>数字a（a越大代表一年内宠物店顾客的满意度越低）</p>
-</blockquote>
-<h2 id="部分代码展示"><a href="#部分代码展示" class="headerlink" title="部分代码展示"></a>部分代码展示</h2><p><strong>skiplist.h</strong><br>
-        <!-- 题目描述
-宠物店领养满意度a，宠物店给每只宠物赋予一个特征值（资质），特征值越高说明宠物的资质越高，越稀有，而领养者也需出示自己想要领养宠物的资质，且一天中的领养者按资质要求从低到高依次满足，所领养宠物的资质小于等于领养者所需资质，如果宠物店存在小于等于领养者要求资质宠物的话，否则，领养者则领养比其资质大且最接近的宠物。要求：当一天中领养者的数量小于宠物店的宠物数量时，由领养者领养宠物；否则......  -->
-        <p class="article-more-link">
-          <a href="/2017/08/31/skiplist/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-    <article id="post-hexo"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/08/31/hexo/">hexo搭建真正属于自己的博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/2017/08/31/hexo/" class="article-date">
-	  <time datetime="2017-08-31T01:38:25.626Z" itemprop="datePublished">2017-08-31</time>
-	</a>
-
-      
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>前些天，自己刚刚接触<a href="https://hexo.io" target="_blank" rel="external">hexo</a>，并用hexo搭建了自己的博客，对hexo的强大搭建博客能力感到赞叹。用我的实际体验来说，你只要是有点计算机基础的人，完全可以轻松的使用hexo搭建起自己的博客。你要是用过github、oschina、gitcafe其中的一样，那对你来说，就可以分分钟上手了。其实网上使用hexo搭建博客的教程多的是，我自己也是跟着JoonWhee’s Blog的教程搭建的博客，那么我还写这篇博客是出于什么目的呢？原因如下：第一，网上的教程大多比较老了，我在搭建的过程中就遇到过不少问题，因此我觉得有必要写个适配hexo3.0的教程。第二，如你所见，本博客由于刚刚起步，博文少的可怜，因此写这篇博文也可以充场子，免得太冷清。第三，算是自己的个人笔记吧，我本人对于刚学的东西都喜欢用博文记录，免得以后自己忘掉。</p>
-</blockquote>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>本教程针对所有windows用户</p>
-<h3 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1.安装Git"></a>1.安装Git</h3><p>下载并安装git，如果你想了解点Git的基础命令，我推荐以下博文：<a href="http://www.cnblogs.com/cspku/articles/Git_cmds.html" target="_blank" rel="external">Git常用的基础命令</a>，<a href="http://blog.csdn.net/hcbbt/article/details/11651229/" target="_blank" rel="external">史上最全github使用方法：github入门到精通</a>,当然即使你不懂Git的命令，跟着本博文走，也完全没问题。</p>
-<h3 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h3><p>下载并安装Node.js，此处建议不要下载最新的v6开头的版本，否则每次执行hexo命令都会有提示，建议使用v5开头的版本，Node.js主要用于安装hexo，npm开头的命令都依赖于Node.js，此处我建议安装完毕后重启电脑，因为我当初安装完没重启，结果后面使用命令安装hexo的时候，提示无效的命令，因此推荐重启。当然，你也可以选择等到后面遇到问题，再选择重启。如果出现以下提示则代表你的Node.js没有安装或者还未生效，如果已经安装了则重启电脑，如果没安装则安装再重启电脑。（总之，重启大法好^^）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bash: nmp: <span class="built_in">command</span> not found</div></pre></td></tr></table></figure>
-<h3 id="3-安装hexo"><a href="#3-安装hexo" class="headerlink" title="3.安装hexo"></a>3.安装hexo</h3>
-        <!-- 前言
-前些天，自己刚刚接触hexo，并用hexo搭建了自己的博客，对hexo的强大搭建博客能力感到赞叹。用我的实际体验来说，你只要是有点计算机基础的人，完全可以轻松的使用hexo搭建起自己的博客。你要是用过github、oschina、gitcafe其中的一样，那对你来说，就可以分分钟上手了。其实网上使用hexo搭建博客的教程多的是，我自己也是跟着JoonWhee’s Blog的教程搭建的博......  -->
-        <p class="article-more-link">
-          <a href="/2017/08/31/hexo/#more">阅读全文</a>
-        </p>
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
-
-
+  </aside>
 </section>
         
       </div>
-      
-        <div align="center" style="margin-top: 30px;"><hr class="hr" style="margin:0px; height:3px;"></div>
       
       <footer id="footer">
   
@@ -704,9 +413,9 @@
 <script src="/js/scripts.js"></script>
 
 
-  <script src="/js/home.js"></script>
 
 
+  <script src="/js/dialog.js"></script>
 
 
 
@@ -791,6 +500,8 @@
   
   <a id="rocket" href="#top" class=""></a>
   <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
   
 </body>
 </html>
