@@ -355,7 +355,8 @@
 <p>而机器人会回答你：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">That is interesting that you have a dog named Max</div></pre></td></tr></table></figure></p>
 <p>然后，如果你问机器人：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">What is my dogs name?</div></pre></td></tr></table></figure></p>
 <p>机器人将会回答：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Your dog's name is Max.</div></pre></td></tr></table></figure></p>
-<h3 id="aiml可以用来实现对话机器人，但是用于中文有以下问题："><a href="#aiml可以用来实现对话机器人，但是用于中文有以下问题：" class="headerlink" title="aiml可以用来实现对话机器人，但是用于中文有以下问题："></a><strong>aiml可以用来实现对话机器人，但是用于中文有以下问题：</strong></h3><ul>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p><strong>aiml可以用来实现对话机器人，但是用于中文有以下问题：</strong></p>
+<ul>
 <li>中文规则库较少。规则库相当于对话机器人的“大脑”，一般来说，规则库越丰富，对话机器人的应对就更像人。目前英文的规则库已经很丰富，涵盖面很广，而且是公开可获取的。但公开的中文规则库就基本没有。</li>
 <li>AIML解释器对中文支持不好。实际上，Python下的Pyaiml模块（解析器）已经能比较好的支持中文，但是也存在以下问题：英文单词间一般都有空格或标点区分，因此具备一种“自然分词”特性，由于中文输入没有以空格分隔的习惯，以上会在实践中造成一些不便。比如要实现有/无空格的输入匹配，就需要在规则库中同时包含这两种模式。但是我们可以将python下的aiml库中的文件(<em>init</em>.py、AimlParser.py、DefaultSubs.py、Kernel.py、LangSupport.py、PatternMgr.py、Utils.py、WordSub.py)进行替换，如下图<br><img src="/gallery/aiml1.png" alt=""></li>
 </ul>
