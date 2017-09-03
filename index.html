@@ -298,6 +298,58 @@
         
           <section id="main" style="float:none;">
   
+    <article id="post-RedBlackTree"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/09/03/RedBlackTree/">红黑树</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/09/03/RedBlackTree/" class="article-date">
+	  <time datetime="2017-09-03T12:20:34.524Z" itemprop="datePublished">2017-09-03</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/树形结构/">树形结构</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>　　平衡二叉搜索树的形式多样，且各具特色。AVL树尽管可以保证最坏情况下的单次操作速度，但需在节点中嵌入平衡因子等标识；更重要的是，删除操作之后的重平衡可能需做多达O(logn)次旋转，从而频繁地导致全树整体拓扑结构的大幅度变化。<br>　　红黑树即是针对后一不足的改进。通过为节点指定颜色，并巧妙地动态调整，红黑树可保证：在每次插入或删除操作之后的重平衡过程中，全树拓扑结构的更新仅涉及常数个节点。尽管最坏情况下需对多达O(logn)个节点重染色，但就分摊意义而言仅为O(1)个。当然，为此首先需在AVL树“适度平衡”标准的基础上，进一步放宽条件。实际上，红黑树所采用的“适度平衡”标准，可大致表述为：任一节点左、右子树的高度，相差不得超过两倍。</p>
+</blockquote>
+<p>###红黑树概述<br>　　为便于对红黑树的理解、实现与分析，这里不妨统一地引入n + 1个外部节点，以保证原树中每一节点的左、右孩子均非空。<br>　　尽管有可能其中之一甚至二者同时是外部节点。当然，这些外部节点的引入只是假想式的，在具体实现时并不一定需要兑现为真实的节点。如此扩展之后的便利之处在于，我们的考查范围只需覆盖真二叉树。<br>　　由红、黑两色节点组成的二叉搜索树若满足以下条件，即为红黑树（red-black tree）：<br>　　(1) 树根始终为黑色<br>　　(2) 外部节点均为黑色<br>　　(3) 其余节点若为红色，则其孩子节点必为黑色<br>　　(4) 从任一外部节点到根节点的沿途，黑节点的数目相等
+        <!-- 
+　　平衡二叉搜索树的形式多样，且各具特色。AVL树尽管可以保证最坏情况下的单次操作速度，但需在节点中嵌入平衡因子等标识；更重要的是，删除操作之后的重平衡可能需做多达O(logn)次旋转，从而频繁地导致全树整体拓扑结构的大幅度变化。　　红黑树即是针对后一不足的改进。通过为节点指定颜色，并巧妙地动态调整，红黑树可保证：在每次插入或删除操作之后的重平衡过程中，全树拓扑结构的更新仅涉及常数个节点。......  -->
+        <p class="article-more-link">
+          <a href="/2017/09/03/RedBlackTree/#more">阅读全文</a>
+        </p>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-KMP"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="article-inner">
     

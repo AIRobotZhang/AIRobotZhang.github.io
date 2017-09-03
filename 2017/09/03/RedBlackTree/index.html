@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>红黑树 | Z華X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="c++" />
+  
+  
+  
+  
+  <meta name="description" content="平衡二叉搜索树的形式多样，且各具特色。AVL树尽管可以保证最坏情况下的单次操作速度，但需在节点中嵌入平衡因子等标识；更重要的是，删除操作之后的重平衡可能需做多达O(logn)次旋转，从而频繁地导致全树整体拓扑结构的大幅度变化。　　红黑树即是针对后一不足的改进。通过为节点指定颜色，并巧妙地动态调整，红黑树可保证：在每次插入或删除操作之后的重平衡过程中，全树拓扑结构的更新仅涉及常数个节点。尽管最">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红黑树">
+<meta property="og:url" content="http://xinghuazhang.xin/2017/09/03/RedBlackTree/index.html">
+<meta property="og:site_name" content="Z華X">
+<meta property="og:description" content="平衡二叉搜索树的形式多样，且各具特色。AVL树尽管可以保证最坏情况下的单次操作速度，但需在节点中嵌入平衡因子等标识；更重要的是，删除操作之后的重平衡可能需做多达O(logn)次旋转，从而频繁地导致全树整体拓扑结构的大幅度变化。　　红黑树即是针对后一不足的改进。通过为节点指定颜色，并巧妙地动态调整，红黑树可保证：在每次插入或删除操作之后的重平衡过程中，全树拓扑结构的更新仅涉及常数个节点。尽管最">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xinghuazhang.xin/gallery/RBT1.png">
+<meta property="og:image" content="http://xinghuazhang.xin/gallery/RBT2.png">
+<meta property="og:image" content="http://xinghuazhang.xin/gallery/RBT3.png">
+<meta property="og:updated_time" content="2017-09-03T13:01:26.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="红黑树">
+<meta name="twitter:description" content="平衡二叉搜索树的形式多样，且各具特色。AVL树尽管可以保证最坏情况下的单次操作速度，但需在节点中嵌入平衡因子等标识；更重要的是，删除操作之后的重平衡可能需做多达O(logn)次旋转，从而频繁地导致全树整体拓扑结构的大幅度变化。　　红黑树即是针对后一不足的改进。通过为节点指定颜色，并巧妙地动态调整，红黑树可保证：在每次插入或删除操作之后的重平衡过程中，全树拓扑结构的更新仅涉及常数个节点。尽管最">
+<meta name="twitter:image" content="http://xinghuazhang.xin/gallery/RBT1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Z華X" type="application/atom+xml">
+  
+
+  
+
+  <link rel="icon" href="/css/images/mylogo.jpg">
+  <link rel="apple-touch-icon" href="/css/images/mylogo.jpg">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/jquery-3.1.1.min.js"></script>
+  <script src="/js/bootstrap.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.css" >
+
+  
+    <link rel="stylesheet" href="/css/dialog.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/css/header-post.css" >
+  
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/vdonate.css" >
+  
+
+</head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  <div id="container">
+    <div id="wrap">
+      
+        <header>
+
+    <div id="allheader" class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-inner">
+          
+          <div class="container"> 
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+            
+              <a class="brand" style="
+                 margin-top: 0px;"  
+                href="#" data-toggle="modal" data-target="#myModal" >
+                  <img width="124px" height="124px" alt="Hike News" src="/css/images/mylogo.jpg">
+              </a>
+            
+            
+            <div class="navbar-collapse collapse">
+              <ul class="hnav navbar-nav">
+                
+                  <li> <a class="main-nav-link" href="/">首页</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/archives">归档</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/funnysite">酷站</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/collection">收藏</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/heart">鸡汤</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/web">web</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/about">关于</a> </li>
+                
+                  <li> <a class="main-nav-link" href="/mybooks">🎁</a> </li>
+                
+                  <li><div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="请输入关键词..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(无标题)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div></li>
+            </div>
+          </div>
+                
+      </div>
+    </div>
+
+</header>
+
+
+
+      
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-RedBlackTree" style="width: 75%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      红黑树
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2017/09/03/RedBlackTree/" class="article-date">
+	  <time datetime="2017-09-03T12:20:34.524Z" itemprop="datePublished">2017-09-03</time>
+	</a>
+
+      
+    <a class="article-category-link" href="/categories/树形结构/">树形结构</a>
+
+      
+	<a class="article-views">
+	<span id="busuanzi_container_page_pv">
+		阅读量<span id="busuanzi_value_page_pv"></span>
+	</span>
+	</a>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>　　平衡二叉搜索树的形式多样，且各具特色。AVL树尽管可以保证最坏情况下的单次操作速度，但需在节点中嵌入平衡因子等标识；更重要的是，删除操作之后的重平衡可能需做多达O(logn)次旋转，从而频繁地导致全树整体拓扑结构的大幅度变化。<br>　　红黑树即是针对后一不足的改进。通过为节点指定颜色，并巧妙地动态调整，红黑树可保证：在每次插入或删除操作之后的重平衡过程中，全树拓扑结构的更新仅涉及常数个节点。尽管最坏情况下需对多达O(logn)个节点重染色，但就分摊意义而言仅为O(1)个。当然，为此首先需在AVL树“适度平衡”标准的基础上，进一步放宽条件。实际上，红黑树所采用的“适度平衡”标准，可大致表述为：任一节点左、右子树的高度，相差不得超过两倍。</p>
+</blockquote>
+<p>###红黑树概述<br>　　为便于对红黑树的理解、实现与分析，这里不妨统一地引入n + 1个外部节点，以保证原树中每一节点的左、右孩子均非空。<br>　　尽管有可能其中之一甚至二者同时是外部节点。当然，这些外部节点的引入只是假想式的，在具体实现时并不一定需要兑现为真实的节点。如此扩展之后的便利之处在于，我们的考查范围只需覆盖真二叉树。<br>　　由红、黑两色节点组成的二叉搜索树若满足以下条件，即为红黑树（red-black tree）：<br>　　(1) 树根始终为黑色<br>　　(2) 外部节点均为黑色<br>　　(3) 其余节点若为红色，则其孩子节点必为黑色<br>　　(4) 从任一外部节点到根节点的沿途，黑节点的数目相等 <a id="more"></a><br>　　其中，条件(1)和(2)意味着红节点均为内部节点，且其父节点及左、右孩子必然存在。另外，条件(3)意味着红节点之父必为黑色，因此树中任一通路都不含相邻的红节点。由此可知，在从根节点通往任一节点的沿途，黑节点都不少于红节点。除去根节点本身，沿途所经黑节点的总数称作该节点的黑深度（black depth）根节点的黑深度为0，其余依此类推。故条件(4)亦可等效地理解和描述为“所有外部节点的黑深度统一”。由条件(4)可进一步推知，在从任一节点通往其任一后代外部节点的沿途，黑节点的总数亦必相等。除去（黑色）外部节点，沿途所经黑节点的总数称作该节点的黑高度（black height）。如此，所有外部节点的黑高度均为0，其余依此类推。<br>　　特别地，根节点的黑高度亦称作全树的黑高度，在数值上与外部节点的黑深度相等。</p>
+<h3 id="节点插入算法"><a href="#节点插入算法" class="headerlink" title="节点插入算法"></a>节点插入算法</h3><p>　　红黑树的查找算法与普通的二叉搜索树相同，故本文主要描述红黑树节点的插入与删除算法，首先讨论节点的插入。<br>　　不妨假定经调用接口search(e)做查找之后，确认目标节点尚不存在。于是，在查找终止的位置x处创建节点，并随即将其染成红色（除非此时全树仅含一个节点）。现在，对照红黑树的四项条件，唯有(3)未必满足，亦即，此时x的父亲也可能是红色。<br>　　因新节点的引入，而导致父子节点同为红色的此类情况，称作“双红”（double red）。将x的父亲与祖父分别记作p和g。既然此前的红黑树合法，故作为红节点p的父亲，g必然存在且为黑色。g作为内部节点，其另一孩子（即p的兄弟、x的叔父）也必然存在，将其记作u。<br>　　双红修正描述相对复杂，这里简要给出流程图与表格总结。<br><img src="/gallery/RBT1.png" alt=""></p>
+<h3 id="节点删除算法"><a href="#节点删除算法" class="headerlink" title="节点删除算法"></a>节点删除算法</h3><p>　　在节点删除的过程中，容易出现双黑现象，即被删除节点的接替者与被删除节点同为黑色，这是局部子树的黑高度不再平衡，需要进行双黑修正，其简要描述见如下的流程图与表格。<br><img src="/gallery/RBT2.png" alt=""></p>
+<p><img src="/gallery/RBT3.png" alt=""></p>
+<h3 id="红黑树的性能分析"><a href="#红黑树的性能分析" class="headerlink" title="红黑树的性能分析"></a>红黑树的性能分析</h3><p>红黑树的节点插入与删除操作的时间复杂度均为O(logn)，那么红黑树与AVL树相比优势在何处呢?<br>　　首先，红黑树的插入与删除操作均仅涉及常数次树的结构调整。而AVL在删除操作时可能出现O(logn)次调整，会对树的结构造成较大的变化，其次，尽管红黑树最坏情况下需对多达O(logn)个节点重染色，但就分摊意义而言仅为O(1)个。</p>
+<h3 id="程序实现"><a href="#程序实现" class="headerlink" title="程序实现"></a>程序实现</h3><p>RBTree.h<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div><div class="line">499</div><div class="line">500</div><div class="line">501</div><div class="line">502</div><div class="line">503</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> RB_TREE_H_INCLUDED</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> RB_TREE_H_INCLUDED</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> RED      0    <span class="comment">// 红色节点</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> BLACK    1    <span class="comment">// 黑色节点</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="comment">// 红黑树的节点</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RB_Node</span>&#123;</span></div><div class="line">    <span class="keyword">char</span> color;        <span class="comment">// 颜色(RED 或 BLACK)</span></div><div class="line">    T key;                    <span class="comment">// 关键字(键值)</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">RB_Node</span>&lt;T&gt; *<span class="title">lchild</span>;</span>    <span class="comment">// 左孩子</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">RB_Node</span>&lt;T&gt; *<span class="title">rchild</span>;</span>    <span class="comment">// 右孩子</span></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">RB_Node</span>&lt;T&gt; *<span class="title">parent</span>;</span>    <span class="comment">// 父结点</span></div><div class="line">&#125;;</div><div class="line"><span class="comment">// 红黑树的根</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RBRoot</span>&#123;</span></div><div class="line">    RB_Node&lt;T&gt; *node;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">R_BTree</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    R_BTree();</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Create_RbTree</span><span class="params">()</span></span>;</div><div class="line">    RB_Node&lt;T&gt;* Create_RbTree_Node(T, RB_Node&lt;T&gt;*, RB_Node&lt;T&gt;*, RB_Node&lt;T&gt;*);</div><div class="line">    RB_Node&lt;T&gt;* Search_RbTree_Node(RBRoot&lt;T&gt;*, T);</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preorder</span><span class="params">(RB_Node&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preorder_rbtree</span><span class="params">(RBRoot&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(RB_Node&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inorder_rbtree</span><span class="params">(RBRoot&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postorder</span><span class="params">(RB_Node&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">postorder_rbtree</span><span class="params">(RBRoot&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">RbTree_LeftRotate</span><span class="params">(RBRoot&lt;T&gt;*, RB_Node&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">RbTree_RightRotate</span><span class="params">(RBRoot&lt;T&gt;*, RB_Node&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Insert_RbTree</span><span class="params">(RBRoot&lt;T&gt;*, T)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">RbTree_Insert</span><span class="params">(RBRoot&lt;T&gt;*, RB_Node&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">RbTree_Insert_ResetColorRotate</span><span class="params">(RBRoot&lt;T&gt;*, RB_Node&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">RbTree_Delete</span><span class="params">(RBRoot&lt;T&gt;*, RB_Node&lt;T&gt;*)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">RbTree_Delete_Reset</span><span class="params">(RBRoot&lt;T&gt;*, RB_Node&lt;T&gt;*, RB_Node&lt;T&gt;*)</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    RBRoot&lt;T&gt;* Root;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">R_BTree&lt;T&gt;::R_BTree()</div><div class="line">&#123;</div><div class="line">    Root = <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">/** 创建红黑树，返回"红黑树的根"**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::Create_RbTree()</div><div class="line">&#123;</div><div class="line">    RBRoot&lt;T&gt; *root = <span class="keyword">new</span>(RBRoot&lt;T&gt;);</div><div class="line">    root-&gt;node = <span class="literal">NULL</span>;</div><div class="line"></div><div class="line">    Root = root;</div><div class="line">&#125;</div><div class="line"><span class="comment">/** 创建结点**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">RB_Node&lt;T&gt;* R_BTree&lt;T&gt;::Create_RbTree_Node(T key, RB_Node&lt;T&gt;* parent, RB_Node&lt;T&gt;* lchild, RB_Node&lt;T&gt;* rchild)</div><div class="line">&#123;</div><div class="line">    RB_Node&lt;T&gt;* p;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> ((p = <span class="keyword">new</span> (RB_Node&lt;T&gt;)) == <span class="literal">NULL</span>)</div><div class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    p-&gt;key = key;</div><div class="line">    p-&gt;lchild = lchild;</div><div class="line">    p-&gt;rchild = rchild;</div><div class="line">    p-&gt;parent = parent;</div><div class="line">    p-&gt;color = BLACK; <span class="comment">// 默认为黑色</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> p;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line">RB_Node&lt;T&gt;* R_BTree&lt;T&gt;::Search_RbTree_Node(RBRoot&lt;T&gt;* root, T key_)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(root != <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        RB_Node&lt;T&gt;* p = root -&gt; node;</div><div class="line">        <span class="keyword">while</span>(p != <span class="literal">NULL</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(p -&gt; key == key_)</div><div class="line">                <span class="keyword">return</span> p;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(p -&gt; key &gt; key_)</div><div class="line">                p = p -&gt; lchild;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                p = p -&gt; rchild;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/** 前序遍历"红黑树"**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::preorder(RB_Node&lt;T&gt;* tree)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(tree != <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;tree-&gt;key;</div><div class="line">        <span class="keyword">if</span>(tree -&gt; color == RED)</div><div class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"(R)"</span>&lt;&lt;<span class="string">" "</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"(B)"</span>&lt;&lt;<span class="string">" "</span>;</div><div class="line">        preorder(tree-&gt;lchild);</div><div class="line">        preorder(tree-&gt;rchild);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::preorder_rbtree(RBRoot&lt;T&gt;* root)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (root)</div><div class="line">    &#123;</div><div class="line">        preorder(root-&gt;node);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/** 中序遍历"红黑树"**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::inorder(RB_Node&lt;T&gt;* tree)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(tree != <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        inorder(tree-&gt;lchild);</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;tree-&gt;key;</div><div class="line">        <span class="keyword">if</span>(tree -&gt; color == RED)</div><div class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"(R)"</span>&lt;&lt;<span class="string">" "</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"(B)"</span>&lt;&lt;<span class="string">" "</span>;</div><div class="line">        inorder(tree-&gt;rchild);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::inorder_rbtree(RBRoot&lt;T&gt;* root)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (root)</div><div class="line">        inorder(root-&gt;node);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/** 后序遍历"红黑树"**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::postorder(RB_Node&lt;T&gt;* tree)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span>(tree != <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        postorder(tree-&gt;lchild);</div><div class="line">        postorder(tree-&gt;rchild);</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;tree-&gt;key;</div><div class="line">        <span class="keyword">if</span>(tree -&gt; color == RED)</div><div class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"(R)"</span>&lt;&lt;<span class="string">" "</span>;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            <span class="built_in">cout</span>&lt;&lt;<span class="string">"(B)"</span>&lt;&lt;<span class="string">" "</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::postorder_rbtree(RBRoot&lt;T&gt;* root)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (root)</div><div class="line">        postorder(root-&gt;node);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/** 对红黑树的节点(x)进行左旋转**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::RbTree_LeftRotate(RBRoot&lt;T&gt;* root, RB_Node&lt;T&gt;* x)</div><div class="line">&#123;</div><div class="line">    RB_Node&lt;T&gt; *y = x-&gt;rchild;   <span class="comment">//找出x的右孩子y</span></div><div class="line">    x-&gt;rchild = y-&gt;lchild; <span class="comment">//将y的左孩子变为x的右孩子</span></div><div class="line">    <span class="keyword">if</span> (y-&gt;lchild != <span class="literal">NULL</span>)  <span class="comment">//如果y的左孩子不为空</span></div><div class="line">        y-&gt;lchild-&gt;parent = x; <span class="comment">//y左孩子的父亲变为x</span></div><div class="line">    y-&gt;parent = x-&gt;parent;  <span class="comment">//将y的父亲变为原来x的父亲</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (x-&gt;parent == <span class="literal">NULL</span>)</div><div class="line">        root-&gt;node = y;            <span class="comment">// 如果 x原为根节点，则将y设为根节点</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (x-&gt;parent-&gt;lchild == x)</div><div class="line">            x-&gt;parent-&gt;lchild = y;    <span class="comment">// 如果 x是它父节点的左孩子，则将y设为“原来x的父节点的左孩子”</span></div><div class="line">        <span class="keyword">else</span></div><div class="line">            x-&gt;parent-&gt;rchild = y;    <span class="comment">// 如果 x是它父节点的左孩子，则将y设为“原来x的父节点的左孩子”</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 将 “x” 设为 “y的左孩子”</span></div><div class="line">    y-&gt;lchild = x;</div><div class="line">    <span class="comment">// 将 “x的父节点” 设为 “y”</span></div><div class="line">    x-&gt;parent = y;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/** 对红黑树的节点(y)进行右旋转**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::RbTree_RightRotate(RBRoot&lt;T&gt;* root, RB_Node&lt;T&gt;* x)</div><div class="line">&#123;</div><div class="line">    RB_Node&lt;T&gt; *y = x-&gt;lchild;  <span class="comment">//找出x的左孩子y</span></div><div class="line">    x-&gt;lchild = y-&gt;rchild; <span class="comment">//将y的右孩子变为x的左孩子</span></div><div class="line">    <span class="keyword">if</span> (y-&gt;rchild != <span class="literal">NULL</span>) <span class="comment">//如果y有右孩子</span></div><div class="line">        y-&gt;rchild-&gt;parent = x; <span class="comment">//则y右孩子的父节点设为x</span></div><div class="line">    y-&gt;parent = x-&gt;parent;  <span class="comment">//将y的父节点重置为x的父节点</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (x-&gt;parent == <span class="literal">NULL</span>)</div><div class="line">        root-&gt;node = y;         <span class="comment">//如果x原为根节点，则将y设为根节点</span></div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (x == x-&gt;parent-&gt;rchild)</div><div class="line">            x-&gt;parent-&gt;rchild = y;    <span class="comment">// 如果 x是它父节点的右孩子，则将y设为“原来x的父节点的右孩子”</span></div><div class="line">        <span class="keyword">else</span></div><div class="line">            x-&gt;parent-&gt;lchild = y;    <span class="comment">// 否则 将y设为“原来x的父节点的左孩子”</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 将 “y” 设为 “x的右孩子”</span></div><div class="line">    y-&gt;rchild = x;</div><div class="line"></div><div class="line">    <span class="comment">// 将 “y的父节点” 设为 “x”</span></div><div class="line">    x-&gt;parent = y;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/** 新建结点(节点键值为key)，并将其插入到红黑树中**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">int</span> R_BTree&lt;T&gt;::Insert_RbTree(RBRoot&lt;T&gt;* root, T key)</div><div class="line">&#123;</div><div class="line">    RB_Node&lt;T&gt; *node;    <span class="comment">// 新建结点</span></div><div class="line"></div><div class="line">    <span class="comment">// 不允许插入相同键值的节点。</span></div><div class="line">    <span class="comment">// (若想允许插入相同键值的节点，注释掉下面两句话即可！)</span></div><div class="line">    <span class="keyword">if</span> (Search_RbTree_Node(root, key) != <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 如果新建结点失败，则返回。</span></div><div class="line">    <span class="keyword">if</span> ((node=Create_RbTree_Node(key, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>)) == <span class="literal">NULL</span>)</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line"></div><div class="line">    RbTree_Insert(root, node);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/** 添加节点：将新节点node插入到红黑树中**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::RbTree_Insert(RBRoot&lt;T&gt;* root, RB_Node&lt;T&gt;* node)</div><div class="line">&#123;</div><div class="line">    RB_Node&lt;T&gt; *y = <span class="literal">NULL</span>;</div><div class="line">    RB_Node&lt;T&gt; *x = root-&gt;node;</div><div class="line">    <span class="keyword">while</span> (x != <span class="literal">NULL</span>)  <span class="comment">//将红黑树当作一颗二叉查找树，将节点添加到二叉查找树中。</span></div><div class="line">    &#123;</div><div class="line">        y = x;</div><div class="line">        <span class="keyword">if</span> (node-&gt;key &lt; x-&gt;key)</div><div class="line">            x = x-&gt;lchild;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            x = x-&gt;rchild;</div><div class="line">    &#125;</div><div class="line">    node-&gt;parent = y;   <span class="comment">//node 的父节点设为y</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (y != <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (node-&gt;key &lt; y-&gt;key)</div><div class="line">            y-&gt;lchild = node;   <span class="comment">// 情况2：若“node所包含的值” &lt; “y所包含的值”，则将node设为“y的左孩子”</span></div><div class="line">        <span class="keyword">else</span></div><div class="line">            y-&gt;rchild = node; <span class="comment">// 情况3：(“node所包含的值” &gt;= “y所包含的值”)将node设为“y的右孩子”</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        root-&gt;node = node; <span class="comment">// 情况1：若y是空节点，则将node设为根</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    node-&gt;color = RED;  <span class="comment">// 设置插入节点的颜色为红色</span></div><div class="line"></div><div class="line">    RbTree_Insert_ResetColorRotate(root, node);  <span class="comment">//通过改变旋转等将它重新修正为一颗红黑树树</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**插入节点后重新塑造红黑树函数* */</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::RbTree_Insert_ResetColorRotate(RBRoot&lt;T&gt;* root, RB_Node&lt;T&gt;* node)</div><div class="line">&#123;</div><div class="line">    RB_Node&lt;T&gt;*parent,*gparent,*uncle,*temp;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> ((parent = node-&gt;parent)!=<span class="literal">NULL</span> &amp;&amp; parent-&gt;color == RED)  <span class="comment">// 若“父节点存在，并且父节点的颜色是红色”</span></div><div class="line">    &#123;</div><div class="line">        gparent = parent-&gt;parent;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (parent == gparent-&gt;lchild)  <span class="comment">//若“父节点”是“祖父节点的左孩子”</span></div><div class="line">        &#123;</div><div class="line">            uncle = gparent-&gt;rchild;</div><div class="line">            <span class="keyword">if</span> (uncle &amp;&amp; uncle-&gt;color == RED)   <span class="comment">// Case 1：叔叔节点是红色</span></div><div class="line">            &#123;</div><div class="line">                uncle-&gt;color = BLACK;</div><div class="line">                parent-&gt;color = BLACK;</div><div class="line">                gparent-&gt;color = RED;</div><div class="line">                node = gparent;</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (parent-&gt;rchild == node)   <span class="comment">// Case 2：叔叔是黑色，且当前节点是右孩子</span></div><div class="line">            &#123;</div><div class="line">                RbTree_LeftRotate(root,parent);</div><div class="line">                temp = parent;</div><div class="line">                parent = node;</div><div class="line">                node = temp;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            parent-&gt;color = BLACK;  <span class="comment">// Case 3：叔叔是黑色，且当前节点是左孩子。</span></div><div class="line">            gparent-&gt;color = RED;</div><div class="line">            RbTree_RightRotate(root, gparent);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            uncle = gparent-&gt;lchild;</div><div class="line">            <span class="keyword">if</span> (uncle &amp;&amp; uncle-&gt;color == RED)   <span class="comment">// Case 1：叔叔节点是红色</span></div><div class="line">            &#123;</div><div class="line">                uncle-&gt;color = BLACK;</div><div class="line">                parent-&gt;color = BLACK;</div><div class="line">                gparent-&gt;color = RED;</div><div class="line">                node = gparent;</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (parent-&gt;lchild == node)  <span class="comment">// Case 2：叔叔是黑色，且当前节点是左孩子</span></div><div class="line">            &#123;</div><div class="line">                RbTree_RightRotate(root, parent);</div><div class="line">                temp = parent;</div><div class="line">                parent = node;</div><div class="line">                node = temp;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            parent-&gt;color = BLACK;  <span class="comment">// Case 3：叔叔是黑色，且当前节点是右孩子。</span></div><div class="line">            gparent-&gt;color = RED;</div><div class="line">            RbTree_LeftRotate(root, gparent);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    root-&gt;node-&gt;color = BLACK;  <span class="comment">// 将根节点设为黑色</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**删除结点**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::RbTree_Delete(RBRoot&lt;T&gt;* root, RB_Node&lt;T&gt;* node)</div><div class="line">&#123;</div><div class="line">    RB_Node&lt;T&gt; *child, *parent;</div><div class="line">    <span class="keyword">char</span> color;</div><div class="line">    <span class="keyword">if</span> ( (node-&gt;lchild!=<span class="literal">NULL</span>) &amp;&amp; (node-&gt;rchild!=<span class="literal">NULL</span>) )  <span class="comment">// 被删除节点的"左右孩子都不为空"的情况。</span></div><div class="line">    &#123;</div><div class="line">        RB_Node&lt;T&gt; *Replace = node; <span class="comment">// 被删节点的后继节点(称为"取代节点")</span></div><div class="line">                                                         <span class="comment">// 用它来取代"被删节点"的位置，然后再将"被删节点"去掉。</span></div><div class="line">        Replace = Replace-&gt;rchild;</div><div class="line">        <span class="keyword">while</span> (Replace-&gt;lchild != <span class="literal">NULL</span>)    <span class="comment">// 获取后继节点</span></div><div class="line">            Replace = Replace-&gt;lchild;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (node-&gt;parent)    <span class="comment">// "node节点"不是根节点(只有根节点不存在父节点)</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (node-&gt;parent-&gt;lchild == node)</div><div class="line">                node-&gt;parent-&gt;lchild = Replace;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                node-&gt;parent-&gt;rchild = Replace;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            root-&gt;node = Replace;  <span class="comment">// "node节点"是根节点，更新根节点。</span></div><div class="line"></div><div class="line"></div><div class="line">        child = Replace-&gt;rchild;  <span class="comment">// child是"取代节点"的右孩子，也是需要"调整的节点"。</span></div><div class="line">                                            <span class="comment">// "取代节点"肯定不存在左孩子！因为它是一个后继节点。</span></div><div class="line">        parent = Replace-&gt;parent;</div><div class="line">        color = Replace-&gt;color; <span class="comment">// 保存"取代节点"的颜色</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> (parent == node) <span class="comment">// "被删除节点"是"它的后继节点的父节点"</span></div><div class="line">        &#123;</div><div class="line">            parent = Replace;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (child)  <span class="comment">//child不为空</span></div><div class="line">                child-&gt;parent=parent;</div><div class="line">            parent-&gt;lchild = child;</div><div class="line"></div><div class="line">            Replace-&gt;rchild = node-&gt;rchild;</div><div class="line">            node-&gt;rchild-&gt;parent = Replace;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Replace-&gt;parent = node-&gt;parent;</div><div class="line">        Replace-&gt;color = node-&gt;color;</div><div class="line">        Replace-&gt;lchild = node-&gt;lchild;</div><div class="line">        node-&gt;lchild-&gt;parent = Replace;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (color == BLACK)  <span class="comment">//replace 的结点为黑色</span></div><div class="line">            RbTree_Delete_Reset(root, child, parent);</div><div class="line">        <span class="built_in">free</span>(node);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (node-&gt;lchild !=<span class="literal">NULL</span>)</div><div class="line">        child = node-&gt;lchild;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        child = node-&gt;rchild;</div><div class="line"></div><div class="line">    parent = node-&gt;parent;</div><div class="line">    color = node-&gt;color;   <span class="comment">// 保存"被取代节点node"的颜色</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (child)</div><div class="line">        child-&gt;parent = parent;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (parent)     <span class="comment">// "node节点"不是根节点</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (parent-&gt;lchild == node)</div><div class="line">            parent-&gt;lchild = child;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            parent-&gt;rchild = child;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">        root-&gt;node = child;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (color == BLACK)  <span class="comment">//被替换结点为黑色</span></div><div class="line">        RbTree_Delete_Reset(root, child, parent);</div><div class="line">    <span class="built_in">free</span>(node);</div><div class="line">    <span class="keyword">return</span> ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/** 红黑树删除修正函数**/</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="line"><span class="keyword">void</span> R_BTree&lt;T&gt;::RbTree_Delete_Reset(RBRoot&lt;T&gt;* root, RB_Node&lt;T&gt;* node, RB_Node&lt;T&gt;* parent)</div><div class="line">&#123;</div><div class="line">    RB_Node&lt;T&gt;* other;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> ((!node || node-&gt;color==BLACK) &amp;&amp; node != root-&gt;node)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (parent-&gt;lchild == node)</div><div class="line">        &#123;</div><div class="line">            other = parent-&gt;rchild;</div><div class="line">            <span class="keyword">if</span> (other-&gt;color==RED)  <span class="comment">// Case 1: node的兄弟是红色的</span></div><div class="line">            &#123;</div><div class="line">                other-&gt;color = BLACK;</div><div class="line">                parent-&gt;color = RED;</div><div class="line">                RbTree_LeftRotate(root, parent);</div><div class="line">                other = parent-&gt;rchild;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> ((!other-&gt;lchild || other-&gt;lchild-&gt;color == BLACK) &amp;&amp;</div><div class="line">                (!other-&gt;rchild || other-&gt;rchild-&gt;color == BLACK))   <span class="comment">// Case 2: node的兄弟是黑色</span></div><div class="line">            &#123;                                                                                     <span class="comment">//且兄弟的两个孩子也都是黑色的</span></div><div class="line">                other-&gt;color = RED;</div><div class="line">                node = parent;</div><div class="line">                parent = node-&gt;parent;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (!other-&gt;rchild || other-&gt;rchild-&gt;color == BLACK)  <span class="comment">// Case 3: node的兄弟是黑色的</span></div><div class="line">                &#123;                                                                                  <span class="comment">//并且兄弟的左孩子是红色，右孩子为黑色</span></div><div class="line">                    other-&gt;lchild-&gt;color = BLACK;</div><div class="line">                    other-&gt;color = RED;</div><div class="line">                    RbTree_RightRotate(root, other);</div><div class="line">                    other = parent-&gt;rchild;</div><div class="line">                &#125;</div><div class="line">                other-&gt;color = parent-&gt;color;   <span class="comment">// Case 4: node的兄弟是黑色的</span></div><div class="line">                parent-&gt;color = BLACK;         <span class="comment">//并且node的右孩子是红色的，左孩子任意颜色</span></div><div class="line">                other-&gt;rchild-&gt;color = BLACK;</div><div class="line">                RbTree_LeftRotate(root, parent);</div><div class="line">                node = root-&gt;node;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            other = parent-&gt;lchild;</div><div class="line">            <span class="keyword">if</span> (other-&gt;color == RED)  <span class="comment">// Case 1: node的兄弟是红色的</span></div><div class="line">            &#123;</div><div class="line">                other-&gt;color = BLACK;</div><div class="line">                parent-&gt;color = RED;</div><div class="line">                RbTree_RightRotate(root, parent);</div><div class="line">                other = parent-&gt;lchild;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> ((!other-&gt;lchild || other-&gt;lchild-&gt;color == BLACK) &amp;&amp;   <span class="comment">// Case 2: node的兄弟是黑色</span></div><div class="line">                (!other-&gt;rchild || other-&gt;rchild-&gt;color == BLACK))        <span class="comment">//且node的两个孩子也都是黑色的</span></div><div class="line">            &#123;</div><div class="line">                other-&gt;color = RED;</div><div class="line">                node = parent;</div><div class="line">                parent = node-&gt;parent;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (!other-&gt;lchild || other-&gt;lchild-&gt;color == BLACK)    <span class="comment">// Case 3: node的兄弟是黑色的</span></div><div class="line">                &#123;                                                                                   <span class="comment">//并且node的左孩子是红色，右孩子为黑色</span></div><div class="line">                    other-&gt;rchild-&gt;color = BLACK;</div><div class="line">                    other-&gt;color = RED;</div><div class="line">                    RbTree_LeftRotate(root, other);</div><div class="line">                    other = parent-&gt;lchild;</div><div class="line">                &#125;</div><div class="line">                other-&gt;color = parent-&gt;color;    <span class="comment">// Case 4: node的兄弟是黑色的</span></div><div class="line">                parent-&gt;color = BLACK;          <span class="comment">//并且node的右孩子是红色的，左孩子任意颜色</span></div><div class="line">                other-&gt;lchild-&gt;color = BLACK;</div><div class="line">                RbTree_RightRotate(root, parent);</div><div class="line">                node = root-&gt;node;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (node)   <span class="comment">/*********/</span></div><div class="line">        node-&gt;color = BLACK;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// RB_TREE_H_INCLUDED</span></span></div></pre></td></tr></table></figure></p>
+<p><strong> 如果需要详细程序，可以联系我！</strong></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184+sp/about" target="_blank" rel="external">《数据结构（C++语言版）》邓俊辉著</a></p>
+<p><strong> 版权声明：本文原创，如有转载，请注明出处</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: '打赏支持', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://github.com/AIRobotZhang/AIRobotZhang.github.io/raw/master/WeChat.jpg',
+  alipayImage: 'https://github.com/AIRobotZhang/AIRobotZhang.github.io/raw/master/Alipay.jpg'
+});
+</script>
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c/">c++</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/02/KMP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">KMP算法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="toc-sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点插入算法"><span class="nav-number">1.</span> <span class="nav-text">节点插入算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#节点删除算法"><span class="nav-number">2.</span> <span class="nav-text">节点删除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#红黑树的性能分析"><span class="nav-number">3.</span> <span class="nav-text">红黑树的性能分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序实现"><span class="nav-number">4.</span> <span class="nav-text">程序实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      
+      <footer id="footer">
+  
+
+  <div class="container">
+      	<div class="row">
+	      <p> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/iTimeTraveler/hexo-theme-hiker" target="_blank">Hexo-theme-hiker</a> </p>
+	      <p id="copyRightEn">Copyright &copy; 2016 - 2017 Z華X All Rights Reserved.</p>
+	      
+	      
+    		<p class="busuanzi_uv">
+				访客数 : <span id="busuanzi_value_site_uv"></span> |  
+				访问量 : <span id="busuanzi_value_site_pv"></span>
+		    </p>
+  		   
+		</div>
+
+		
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+    var allheader = document.getElementById("allheader");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight + "px";
+    if (allheader != null) {
+      contentdiv.style.minHeight = document.body.offsetHeight - allheader.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    } else {
+      contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    }
+</script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/funnysite" class="mobile-nav-link">酷站</a>
+  
+    <a href="/collection" class="mobile-nav-link">收藏</a>
+  
+    <a href="/heart" class="mobile-nav-link">鸡汤</a>
+  
+    <a href="/web" class="mobile-nav-link">web</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+    <a href="/mybooks" class="mobile-nav-link">🎁</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+
+
+
+
+  <script src="/js/dialog.js"></script>
+
+
+
+
+
+
+
+
+	<div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="myModalLabel">设置</h2>
+      </div>
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+
+
+      <div class="modal-body">
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="javascript:setFontSize();" aria-expanded="true" aria-controls="collapseOne">
+              正文字号大小
+            </a>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            您已调整页面字体大小
+          </div>
+        </div>
+      
+
+
+          <div style="margin:6px;">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="javascript:setBackground();" aria-expanded="true" aria-controls="collapseTwo">
+              夜间护眼模式
+            </a>
+        </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            夜间模式已经开启，再次单击按钮即可关闭 
+          </div>
+        </div>
+
+        <div>
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关 于&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+          <div class="panel-body">
+            Z華X
+          </div>
+          <div class="panel-body">
+            Copyright © 2017 zhangxinghua All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+
+      <hr style="margin-top:0px; margin-bottom:0px; width:80%; border-top: 1px solid #000;">
+      <hr style="margin-top:2px; margin-bottom:0px; width:80%; border-top: 3px solid #000;">
+      <div class="modal-footer">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+  
+    <a id="menu-switch"><i class="fa fa-bars fa-lg"></i></a>
+  
+</body>
+</html>
