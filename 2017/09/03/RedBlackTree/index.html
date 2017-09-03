@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://xinghuazhang.xin/gallery/RBT1.png">
 <meta property="og:image" content="http://xinghuazhang.xin/gallery/RBT2.png">
 <meta property="og:image" content="http://xinghuazhang.xin/gallery/RBT3.png">
-<meta property="og:updated_time" content="2017-09-03T13:01:26.643Z">
+<meta property="og:updated_time" content="2017-09-03T13:09:25.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="红黑树">
 <meta name="twitter:description" content="平衡二叉搜索树的形式多样，且各具特色。AVL树尽管可以保证最坏情况下的单次操作速度，但需在节点中嵌入平衡因子等标识；更重要的是，删除操作之后的重平衡可能需做多达O(logn)次旋转，从而频繁地导致全树整体拓扑结构的大幅度变化。　　红黑树即是针对后一不足的改进。通过为节点指定颜色，并巧妙地动态调整，红黑树可保证：在每次插入或删除操作之后的重平衡过程中，全树拓扑结构的更新仅涉及常数个节点。尽管最">
@@ -208,7 +208,7 @@
         <blockquote>
 <p>　　平衡二叉搜索树的形式多样，且各具特色。AVL树尽管可以保证最坏情况下的单次操作速度，但需在节点中嵌入平衡因子等标识；更重要的是，删除操作之后的重平衡可能需做多达O(logn)次旋转，从而频繁地导致全树整体拓扑结构的大幅度变化。<br>　　红黑树即是针对后一不足的改进。通过为节点指定颜色，并巧妙地动态调整，红黑树可保证：在每次插入或删除操作之后的重平衡过程中，全树拓扑结构的更新仅涉及常数个节点。尽管最坏情况下需对多达O(logn)个节点重染色，但就分摊意义而言仅为O(1)个。当然，为此首先需在AVL树“适度平衡”标准的基础上，进一步放宽条件。实际上，红黑树所采用的“适度平衡”标准，可大致表述为：任一节点左、右子树的高度，相差不得超过两倍。</p>
 </blockquote>
-<p>###红黑树概述<br>　　为便于对红黑树的理解、实现与分析，这里不妨统一地引入n + 1个外部节点，以保证原树中每一节点的左、右孩子均非空。<br>　　尽管有可能其中之一甚至二者同时是外部节点。当然，这些外部节点的引入只是假想式的，在具体实现时并不一定需要兑现为真实的节点。如此扩展之后的便利之处在于，我们的考查范围只需覆盖真二叉树。<br>　　由红、黑两色节点组成的二叉搜索树若满足以下条件，即为红黑树（red-black tree）：<br>　　(1) 树根始终为黑色<br>　　(2) 外部节点均为黑色<br>　　(3) 其余节点若为红色，则其孩子节点必为黑色<br>　　(4) 从任一外部节点到根节点的沿途，黑节点的数目相等 <a id="more"></a><br>　　其中，条件(1)和(2)意味着红节点均为内部节点，且其父节点及左、右孩子必然存在。另外，条件(3)意味着红节点之父必为黑色，因此树中任一通路都不含相邻的红节点。由此可知，在从根节点通往任一节点的沿途，黑节点都不少于红节点。除去根节点本身，沿途所经黑节点的总数称作该节点的黑深度（black depth）根节点的黑深度为0，其余依此类推。故条件(4)亦可等效地理解和描述为“所有外部节点的黑深度统一”。由条件(4)可进一步推知，在从任一节点通往其任一后代外部节点的沿途，黑节点的总数亦必相等。除去（黑色）外部节点，沿途所经黑节点的总数称作该节点的黑高度（black height）。如此，所有外部节点的黑高度均为0，其余依此类推。<br>　　特别地，根节点的黑高度亦称作全树的黑高度，在数值上与外部节点的黑深度相等。</p>
+<h3 id="红黑树概述"><a href="#红黑树概述" class="headerlink" title="红黑树概述"></a>红黑树概述</h3><p>　　为便于对红黑树的理解、实现与分析，这里不妨统一地引入n + 1个外部节点，以保证原树中每一节点的左、右孩子均非空。<br>　　尽管有可能其中之一甚至二者同时是外部节点。当然，这些外部节点的引入只是假想式的，在具体实现时并不一定需要兑现为真实的节点。如此扩展之后的便利之处在于，我们的考查范围只需覆盖真二叉树。<br>　　由红、黑两色节点组成的二叉搜索树若满足以下条件，即为红黑树（red-black tree）：<br>　　(1) 树根始终为黑色<br>　　(2) 外部节点均为黑色<br>　　(3) 其余节点若为红色，则其孩子节点必为黑色<br>　　(4) 从任一外部节点到根节点的沿途，黑节点的数目相等 <a id="more"></a><br>　　其中，条件(1)和(2)意味着红节点均为内部节点，且其父节点及左、右孩子必然存在。另外，条件(3)意味着红节点之父必为黑色，因此树中任一通路都不含相邻的红节点。由此可知，在从根节点通往任一节点的沿途，黑节点都不少于红节点。除去根节点本身，沿途所经黑节点的总数称作该节点的黑深度（black depth）根节点的黑深度为0，其余依此类推。故条件(4)亦可等效地理解和描述为“所有外部节点的黑深度统一”。由条件(4)可进一步推知，在从任一节点通往其任一后代外部节点的沿途，黑节点的总数亦必相等。除去（黑色）外部节点，沿途所经黑节点的总数称作该节点的黑高度（black height）。如此，所有外部节点的黑高度均为0，其余依此类推。<br>　　特别地，根节点的黑高度亦称作全树的黑高度，在数值上与外部节点的黑深度相等。</p>
 <h3 id="节点插入算法"><a href="#节点插入算法" class="headerlink" title="节点插入算法"></a>节点插入算法</h3><p>　　红黑树的查找算法与普通的二叉搜索树相同，故本文主要描述红黑树节点的插入与删除算法，首先讨论节点的插入。<br>　　不妨假定经调用接口search(e)做查找之后，确认目标节点尚不存在。于是，在查找终止的位置x处创建节点，并随即将其染成红色（除非此时全树仅含一个节点）。现在，对照红黑树的四项条件，唯有(3)未必满足，亦即，此时x的父亲也可能是红色。<br>　　因新节点的引入，而导致父子节点同为红色的此类情况，称作“双红”（double red）。将x的父亲与祖父分别记作p和g。既然此前的红黑树合法，故作为红节点p的父亲，g必然存在且为黑色。g作为内部节点，其另一孩子（即p的兄弟、x的叔父）也必然存在，将其记作u。<br>　　双红修正描述相对复杂，这里简要给出流程图与表格总结。<br><img src="/gallery/RBT1.png" alt=""></p>
 <h3 id="节点删除算法"><a href="#节点删除算法" class="headerlink" title="节点删除算法"></a>节点删除算法</h3><p>　　在节点删除的过程中，容易出现双黑现象，即被删除节点的接替者与被删除节点同为黑色，这是局部子树的黑高度不再平衡，需要进行双黑修正，其简要描述见如下的流程图与表格。<br><img src="/gallery/RBT2.png" alt=""></p>
 <p><img src="/gallery/RBT3.png" alt=""></p>
@@ -287,7 +287,7 @@ var a = new Donate({
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
     
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#节点插入算法"><span class="nav-number">1.</span> <span class="nav-text">节点插入算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#节点删除算法"><span class="nav-number">2.</span> <span class="nav-text">节点删除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#红黑树的性能分析"><span class="nav-number">3.</span> <span class="nav-text">红黑树的性能分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序实现"><span class="nav-number">4.</span> <span class="nav-text">程序实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#红黑树概述"><span class="nav-number">1.</span> <span class="nav-text">红黑树概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#节点插入算法"><span class="nav-number">2.</span> <span class="nav-text">节点插入算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#节点删除算法"><span class="nav-number">3.</span> <span class="nav-text">节点删除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#红黑树的性能分析"><span class="nav-number">4.</span> <span class="nav-text">红黑树的性能分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序实现"><span class="nav-number">5.</span> <span class="nav-text">程序实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol>
     
     </div>
   </aside>
