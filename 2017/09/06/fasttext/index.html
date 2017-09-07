@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://xinghuazhang.xin/gallery/fasttext4.png">
 <meta property="og:image" content="http://xinghuazhang.xin/gallery/fasttext5.png">
 <meta property="og:image" content="http://xinghuazhang.xin/gallery/fasttext6.png">
-<meta property="og:updated_time" content="2017-09-07T12:13:50.001Z">
+<meta property="og:updated_time" content="2017-09-07T12:17:28.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高级词向量表达(一)——FastText">
 <meta name="twitter:description" content="FastText是Facebook开发的一款快速文本分类器，提供简单而高效的文本分类和表征学习的方法，不过这个项目其实是有两部分组成的，一部分是这篇文章介绍的fastText文本分类（paper：A. Joulin, E. Grave, P. Bojanowski, T. Mikolov, Bag of Tricks for Efficient Text Classification（高效文">
@@ -215,6 +215,7 @@
 <p>FastText 方法包含三部分：模型架构、层次 Softmax 和 N-gram 特征。</p>
 </blockquote>
 <p>　　FastText 模型输入一个词的序列（一段文本或者一句话)，输出这个词序列属于不同类别的概率。<br>　　序列中的词和词组组成特征向量，特征向量通过线性变换映射到中间层，中间层再映射到标签。<br>　　FastText 在预测标签时使用了非线性激活函数，但在中间层不使用非线性激活函数。<br>　　FastText 模型架构和 Word2Vec 中的 CBOW 模型很类似。不同之处在于，FastText 预测标签，而 CBOW 模型预测中间词。</p>
+<a id="more"></a>
 <p><img src="/gallery/fasttext1.png" alt=""></p>
 <h3 id="改善运算效率——softmax层级"><a href="#改善运算效率——softmax层级" class="headerlink" title="改善运算效率——softmax层级"></a>改善运算效率——softmax层级</h3><p>　　对于有大量类别的数据集，ＦastText使用了一个分层分类器（而非扁平式架构）。不同的类别被整合进树形结构中（想象下二叉树而非 list）。在某些文本分类任务中类别很多，计算线性分类器的复杂度高。为了改善运行时间，ＦastText 模型使用了层次 Softmax 技巧。层次 Softmax 技巧建立在哈弗曼编码的基础上，对标签进行编码，能够极大地缩小模型预测目标的数量。(详细参考<a href="http://www.cnblogs.com/Jezze/archive/2011/12/23/2299884.html" target="_blank" rel="external">哈夫曼树与哈夫曼编码</a>)</p>
 <p><img src="/gallery/fasttext2.png" alt=""></p>
