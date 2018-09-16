@@ -180,7 +180,7 @@ progress::-moz-progress-value {
 }
 
 .weixin img{
-    width: 120px;
+    width: 200px;
 }
 
 .left-label {
@@ -207,7 +207,7 @@ progress::-moz-progress-value {
     margin: 0 auto;
 
     width: 1050px;
-    height: 1800px;
+    height: 1500px;
     background-color: white;
 
 }
