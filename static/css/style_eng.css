@@ -191,14 +191,14 @@ progress::-moz-progress-value {
 .portrait {
     margin: 0 auto;
     margin-top:20px;
-    margin-bottom: 10px;
+    margin-bottom:10px;
     background-image:url('img/me.jpg');
-    background-size: 98%;
+    background-size: 100%;
     background-position:center;
-    border-radius:50%;
+    background-repeat:no-repeat;
     border:5px solid #607d8b;
-    width:200px;
-    height:200px;
+    width:180px;
+    height:230px;
 }
 
 
@@ -207,7 +207,7 @@ progress::-moz-progress-value {
     margin: 0 auto;
 
     width: 1050px;
-    height: 1600px;
+    height: 1650px;
     background-color: white;
 
 }
